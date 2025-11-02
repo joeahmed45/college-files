@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ملفات PDF</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      padding: 30px 20px;
+      min-height: 100vh;
+    }
+
+    .header-container {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .back {
+      display: inline-block;
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .back:hover {
+      background: rgba(96, 165, 250, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    .files-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #0a0a0a;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .file-item {
+      display: block;
+      padding: 14px 20px;
+      margin: 12px 0;
+      background: #111111;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      border: 1px solid #222;
+      text-align: center; /* ← هذا السطر يجعل النص في المنتصف */
+    }
+
+    .file-item:hover {
+      background: #1a1a1a;
+      border-color: #60a5fa;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 15px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .files-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <a class="back" href="material.html">← العودة للمادة</a>
+    <h2>ملفات PDF</h2>
+  </div>
+
+  <div class="files-container">
+    <a class="file-item" href="pdf/مهنه تعليم.pdf" target="_blank">مهنة تعليم</a>
+    <a class="file-item" href="pdf/المحاضرة الثانية والثالثة مهنة التعليم 1.pdf" target="_blank">المحاضرة الثانية والثالثة مهنة التعليم 1</a>
+    <a class="file-item" href="pdf/الفصل الثالث التنمية المهنية للمعلم.pdf" target="_blank">الفصل الثالث التنمية المهنية للمعلم</a>
+    <a class="file-item" href="pdf/مهنة التعليم كلها.pdf" target="_blank">مهنة التعليم كلها</a>
+    <a class="file-item" href="pdf/اولي عام اللغة العربية 2026(2)(1).pdf" target="_blank">لائحة أسماء الطلاب المقيدين بشعبة اللغة العربية فرقة أولى</a>
+
+    <!-- أضف باقي ملفاتك هنا بنفس الشكل -->
+    <!--
+    <a class="file-item" href="pdf/أسئلة_امتحان.pdf" target="_blank">أسئلة امتحان</a>
+    -->
+  </div>
+</body>
+</html>

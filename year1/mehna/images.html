@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الصور</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #000000;
+      color: #ffffff;
+      padding: 30px 20px;
+    }
+    .header-container {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+    .back {
+      display: inline-block;
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    .back:hover {
+      background: rgba(96, 165, 250, 0.1);
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* مجموعة الصور */
+    .image-group {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      background: #0a0a0a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* رأس المجموعة (قابل للضغط) */
+    .group-header {
+      padding: 18px 25px;
+      background: #111111;
+      color: #cbd5e1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      transition: background 0.3s;
+    }
+    .group-header:hover {
+      background: #1a1a1a;
+    }
+    .group-header::after {
+      content: "▼";
+      font-size: 0.8rem;
+      color: #60a5fa;
+      transition: transform 0.3s;
+    }
+    .group-header.active::after {
+      transform: rotate(180deg);
+    }
+
+    /* محتوى المجموعة (مخفي افتراضيًا) */
+    .group-content {
+      display: none;
+      padding: 20px;
+      background: #0f0f0f;
+    }
+    .group-content.show {
+      display: block;
+    }
+
+    /* بطاقة صورة */
+    .img-card {
+      background: #151515;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #252525;
+    }
+    .img-card img {
+      max-width: 100%;
+      max-height: 220px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .img-card a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .img-card a:hover {
+      color: #60a5fa;
+    }
+
+    @media (max-width: 600px) {
+      .header-container, .image-group {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <a class="back" href="material.html">← العودة للمادة</a>
+    <h2>الصور</h2>
+  </div>
+<!-- المجموعة 1: خرائط ذهنية -->
+  <div class="image-group">
+    <div class="group-header" onclick="toggleGroup(this)">فارغ</div>
+    <div class="group-content">
+      <div class="img-card">
+        <a href="images/فارغ.jpg" target="_blank">
+          <img src="images/فارغ.jpg" alt="فارغ">
+          <div>فارغ</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- يمكنك إضافة مجموعات جديدة بنفس الشكل -->
+
+  <script>
+    function toggleGroup(header) {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.contains('active');
+
+      // إغلاق كل المجموعات
+      document.querySelectorAll('.group-header').forEach(h => {
+        h.classList.remove('active');
+        h.nextElementSibling.classList.remove('show');
+      });
+
+      // فتح المجموعة المطلوبة فقط (إذا لم تكن مفتوحة)
+      if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('show');
+      }
+    }
+  </script>
+</body>
+</html>
