@@ -821,12 +821,22 @@ export default function App() {
     setExpandedSections(prev => ({ ...prev, [key]: !prev[key] }));
   };
   const openPreview = (item, type) => {
-    setPreviewItem({ ...item, type });
-    markAsViewed(item.url || item.name);
-    if (item.isNew && item.id) {
-      markFileAsSeen(item.id);
-    }
-  };
+  // إصلاح الرابط ليشمل PUBLIC_URL
+  const fixedUrl = item.url && !item.url.startsWith('http') 
+    ? `${process.env.PUBLIC_URL}${item.url}`
+    : item.url;
+  
+  setPreviewItem({ 
+    ...item, 
+    type, 
+    url: fixedUrl // تخزين الرابط المُصلح
+  });
+  
+  markAsViewed(item.url || item.name);
+  if (item.isNew && item.id) {
+    markFileAsSeen(item.id);
+  }
+};
   const closePreview = () => {
     setPreviewItem(null);
   };
@@ -1468,7 +1478,9 @@ export default function App() {
                                                   <Eye size={16} />
                                                 </button>
                                                 <a 
-                                                  href={file.url} 
+                                                  href={file.url && !file.url.startsWith('http')
+                                                    ? `${process.env.PUBLIC_URL}${file.url}`
+                                                    : file.url} 
                                                   download 
                                                   onClick={() => {
                                                     if (file.isNew && file.id) {
@@ -1536,7 +1548,9 @@ export default function App() {
                                                           <Eye size={16} />
                                                         </button>
                                                         <a 
-                                                          href={image.url} 
+                                                          href={image.url && !image.url.startsWith('http')
+                                                            ? `${process.env.PUBLIC_URL}${image.url}`
+                                                            : image.url} 
                                                           download 
                                                           onClick={() => {
                                                             if (image.isNew && image.id) {
@@ -1596,7 +1610,9 @@ export default function App() {
                                                   <Eye size={16} />
                                                 </button>
                                                 <a 
-                                                  href={video.url} 
+                                                  href={video.url && !video.url.startsWith('http')
+                                                    ? `${process.env.PUBLIC_URL}${video.url}`
+                                                    : video.url} 
                                                   download 
                                                   onClick={() => {
                                                     if (video.isNew && video.id) {
