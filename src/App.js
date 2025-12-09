@@ -977,9 +977,15 @@ export default function App() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex-1"></div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pl-2">
               <BookOpen size={48} />
-              <h1 className="text-4xl font-bold" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>📚College Files Website</h1>
+<h1
+  className="text-4xl font-bold text-center pl-5"
+  style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}
+>
+  <span className="block">College Files</span>
+  <span className="block">Website</span>
+</h1>
             </div>
             <div className="flex-1 flex justify-end">
               <button
@@ -997,7 +1003,7 @@ export default function App() {
       </header>
       
       {/* خانة الملاحظات الشخصية */}
-      <div className={`fixed bottom-6 right-6 z-50`}>
+      <div className={`fixed bottom-6 right-6 z-50 ${isNewsPanelOpen ? 'hidden' : ''}`}>
         {!isNotePanelOpen ? (
           <button
             onClick={openNotePanel}
@@ -1245,7 +1251,7 @@ export default function App() {
       </div>
       
       {/* خانة الأخبار (ميغافون) */}
-      <div className={`fixed bottom-6 left-6 z-50`}>
+      <div className={`fixed bottom-6 left-6 z-50 ${isNotePanelOpen ? 'hidden' : ''}`}>
         {!isNewsPanelOpen ? (
           <button
             onClick={openNewsPanel}
@@ -1255,6 +1261,9 @@ export default function App() {
             aria-label="فتح الأخبار"
           >
             <Megaphone size={24} />
+  {news.some(item => item.isNew && !viewedNews.includes(item.id)) && (
+    <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+  )}
           </button>
         ) : (
           <div className={`rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ${
@@ -1431,7 +1440,7 @@ export default function App() {
                             <div key={subject.id} className={`${darkMode ? 'bg-gray-600' : 'bg-white'} rounded-xl shadow-md transition-all duration-500 transform hover:scale-[1.02] hover:shadow-xl`}>
                               <div
                                 onClick={() => toggleSubject(subject.id)}
-                                className={`${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-green-100 hover:bg-green-200'} p-4 rounded-xl cursor-pointer transition-all duration-500 flex items-center justify-between transform hover:scale-[1.01]`}
+                                className={`${darkMode ? 'bg-gray-700 hover:bg-gray-700' : 'bg-green-100 hover:bg-green-200'} p-4 rounded-xl cursor-pointer transition-all duration-500 flex items-center justify-between transform hover:scale-[1.01]`}
                               >
                                 <div className="flex items-center gap-3">
                                   <FolderOpen size={24} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
@@ -1651,24 +1660,25 @@ export default function App() {
               <X size={24} />
             </button>
             <div className="p-6">
-              <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{previewItem.name}</h3>
+              <h3 className={`text-2xl font-bold mb-4 pl-12 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{previewItem.name}</h3>
               <div className={`p-8 ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-lg text-center`}>
                 {previewItem.type === 'file' && (
-                  <>
-                    {previewItem.url ? (
-                      <iframe 
-                        src={previewItem.url} 
-                        className="w-full h-96 mb-4 rounded-lg"
-                        title={previewItem.name}
-                      />
-                    ) : (
-                      <>
-                        <FileText size={64} className="mx-auto mb-4 text-blue-600" />
-                        <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>ملف PDF - {previewItem.size}</p>
-                      </>
-                    )}
-                  </>
-                )}
+  <>
+    {/* زر عرض الملف كامل */}
+    {previewItem.url && (
+      <a 
+        href={previewItem.url} 
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-block mt-4 px-6 py-3 rounded-lg font-medium ${
+          darkMode ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-blue-600 hover:bg-blue-700'
+        } text-white transition-colors duration-200`}
+      >
+        عرض الملف كامل
+      </a>
+    )}
+  </>
+)}
                 {previewItem.type === 'image' && (
                   <>
                     {previewItem.url ? (
@@ -1718,21 +1728,21 @@ export default function App() {
           </div>
         </div>
       )}
-      <footer className="bg-gray-800 text-white mt-2 py-8">
+      <footer className="bg-gray-800 text-white mt-0.5 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm mt-1">مبرمج هذا الموقع: يوسف أحمد صالح</p>
           <a 
             href="https://docs.google.com/forms/d/e/1FAIpQLSexdXzeXl8kGW2Oo-11IuFSIrWxFElegE7xlc2PqtaYQUitgw/viewform" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-5 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-10 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 mt-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-10 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
             <span className="font-semibold">أرسل Feedback</span>
           </a>
-          <p className="text-xs text-gray-400 mt-4">جميع الحقوق محفوظة © 2025</p>
+          <p className="text-xs text-gray-400 mt-2">جميع الحقوق محفوظة © 2025</p>
         </div>
       </footer>
     </div>
