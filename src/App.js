@@ -1064,7 +1064,7 @@ export default function App() {
       </header>
       
       {/* خانة الملاحظات الشخصية */}
-      <div className={`fixed bottom-6 right-6 z-50 ${isNewsPanelOpen ? 'hidden' : ''}`}>
+      <div className={`fixed bottom-6 right-6 z-50 ${isNewsPanelOpen || showHelp ? 'hidden' : ''}`}>
         {!isNotePanelOpen ? (
           <button
             onClick={openNotePanel}
@@ -1312,7 +1312,7 @@ export default function App() {
       </div>
       
       {/* خانة الأخبار (ميغافون) */}
-      <div className={`fixed bottom-6 left-6 z-50 ${isNotePanelOpen ? 'hidden' : ''}`}>
+      <div className={`fixed bottom-6 left-6 z-50 ${isNotePanelOpen || showHelp ? 'hidden' : ''}`}>
         {!isNewsPanelOpen ? (
           <button
             onClick={openNewsPanel}
