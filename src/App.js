@@ -977,7 +977,7 @@ export default function App() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex-1"></div>
-            <div className="flex items-center gap-3 pl-2">
+            <div className="flex items-center gap-3">
               <BookOpen size={48} />
 <h1
   className="text-4xl font-bold text-center pl-5"
