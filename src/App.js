@@ -980,7 +980,7 @@ export default function App() {
             <div className="flex items-center gap-3">
               <BookOpen size={48} />
 <h1
-  className="text-4xl font-bold text-center pl-5"
+  className="text-4xl font-bold text-center pl-10"
   style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}
 >
   <span className="block text-2xl">College Files</span>
