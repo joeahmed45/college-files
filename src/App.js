@@ -77,6 +77,7 @@ export default function App() {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null);
+  const [showHelp, setShowHelp] = useState(false);
   
   // حالات الأخبار (News)
   const [viewedNews, setViewedNews] = useState(() => {
@@ -891,7 +892,13 @@ export default function App() {
         id: Date.now().toString(),
         title: currentNote.title,
         content: currentNote.content,
-        createdAt: new Date().toLocaleString('ar-EG')
+        createdAt: new Date().toLocaleString('ar-EG', { 
+  year: 'numeric', 
+  month: '2-digit', 
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit'
+})
       };
       setNotes(prev => [newNote, ...prev]);
       setIsCreatingNote(false);
@@ -979,6 +986,60 @@ export default function App() {
             <div className="flex-1"></div>
             <div className="flex items-center gap-3">
               <BookOpen size={48} />
+              <div className="absolute top-4 right-4 z-10">
+  <button
+    onClick={() => setShowHelp(true)}
+    className="w-9 h-9 rounded-full bg-gray-800 text-white font-bold text-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-200"
+    aria-label="تعليمات"
+  >
+    ؟
+  </button>
+</div>
+
+{/* نافذة التعليمات */}
+{showHelp && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative p-6">
+      <button
+        onClick={() => setShowHelp(false)}
+        className="absolute -top-2 translate-y-5 -left-3 translate-x-5 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700"
+      >
+        <X size={18} />
+      </button>
+      
+      <h2 className="text-2xl font-bold text-center mb-4 text-gray-800 pl-4">
+        دليل موقع ملفات كلية التربية – شعبة اللغة العربية | جامعة أسيوط
+      </h2>
+      
+      <p className="text-center mb-6 text-gray-600">
+        مرحباً بك في موقعك الشامل لتجميع جميع مواردك الدراسية في مكان واحد!
+      </p>
+      
+      <h3 className="text-xl font-bold mb-3 text-gray-800">أبرز المميزات:</h3>
+      <ul className="space-y-2 mb-6 text-gray-700">
+        <li>👁️ زر "العين": معاينة سريعة لأي ملف (PDF، صورة، فيديو) قبل التنزيل.</li>
+        <li>⬇️ زر "التنزيل": تحميل مباشر لأي ملف بضغطة واحدة.</li>
+        <li>📝 دفتر الملاحظات: أضف ملاحظاتك الشخصية، عدّلها، واحفظها محلياً  على جهازك ولا نستطيع رؤية ما كتبته — لن تُحذف حتى بعد الخروج!</li>
+        <li>🌙 الوضع الليلي/النهاري: تبديل فوري حسب راحتك البصرية.</li>
+        <li>📢 خانة الأخبار: احصل على آخر التحديثات (مثل إضافة ملفات جديدة أو إعلانات هامة) مع علامة "جديد".</li>
+        <li>🔖 علامة "جديد": تظهر تلقائيًا بجانب كل ملف أو خبر جديد، وتختفي بعد المشاهدة.</li>
+        <li>📱 دعم كامل للموبايل والكمبيوتر: واجهة متجاوبة تعمل بسلاسة على جميع الأجهزة.</li>
+      </ul>
+      
+      <h3 className="text-xl font-bold mb-3 text-gray-800">كيف تستخدم الموقع؟</h3>
+      <ol className="space-y-2 mb-6 text-gray-700">
+        <li>اختر فرقتك ← الترم ← المادة.</li>
+        <li>اضغط على "عين" للمعاينة أو "تنزيل" للحفظ.</li>
+        <li>استخدم دفتر الملاحظات (أيقونة 📓 في الزاوية اليمنى السفلية) لكتابة ملاحظاتك.</li>
+        <li>تابع الأخبار (أيقونة 📢 في الزاوية اليسرى السفلية) لأحدث التحديثات.</li>
+      </ol>
+      
+      <p className="text-center italic text-gray-600">
+        الموقع مجاني وآمن 100%، لا يتطلب تسجيل دخول، وتم تطويره من الطالب يوسف أحمد صالح لخدمة زملائي طلاب كلية التربية.
+      </p>
+    </div>
+  </div>
+)}
 <h1
   className="text-4xl font-bold text-center pl-10"
   style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}
@@ -1728,7 +1789,7 @@ export default function App() {
           </div>
         </div>
       )}
-      <footer className="bg-gray-800 text-white mt-0.5 py-8">
+      <footer className="bg-gray-800 text-white mt-3.5 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm mt-1">مبرمج هذا الموقع: يوسف أحمد صالح</p>
           <a 
