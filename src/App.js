@@ -983,8 +983,8 @@ export default function App() {
   className="text-4xl font-bold text-center pl-5"
   style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}
 >
-  <span className="block">College Files</span>
-  <span className="block">Website</span>
+  <span className="block text-2xl">College Files</span>
+  <span className="block text-3xl">Website</span>
 </h1>
             </div>
             <div className="flex-1 flex justify-end">
