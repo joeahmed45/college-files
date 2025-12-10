@@ -59,6 +59,14 @@ export default function App() {
       return {};
     }
   });
+  const [viewedSections, setViewedSections] = useState(() => {
+  try {
+    const saved = localStorage.getItem('viewedSections');
+    return saved ? JSON.parse(saved) : {};
+  } catch {
+    return {};
+  }
+});
   
   // حالات ملاحظات المستخدم
   const [notes, setNotes] = useState(() => {
@@ -156,6 +164,13 @@ export default function App() {
       console.error('خطأ في حفظ viewedNews:', error);
     }
   }, [viewedNews]);
+  useEffect(() => {
+  try {
+    localStorage.setItem('viewedSections', JSON.stringify(viewedSections));
+  } catch (error) {
+    console.error('خطأ في حفظ viewedSections:', error);
+  }
+}, [viewedSections]);
   
   // تعليم خبر كـ "تم رؤيته"
   const markNewsAsViewed = (newsId) => {
@@ -163,28 +178,39 @@ export default function App() {
       setViewedNews(prev => [...prev, newsId]);
     }
   };
+  const hasNewItemsInSection = (items) => {
+  return items && items.some(item => item?.isNew && item?.id && !newFilesSeen[item.id]);
+};
+
+const hasNewItemsInImageGroups = (imageGroups) => {
+  return imageGroups.some(group => 
+    group.images.some(image => image.isNew && image.id && !newFilesSeen[image.id])
+  );
+};
+
+const hasNewItemsInSubject = (subject) => {
+  const hasNewFiles = hasNewItemsInSection(subject.files);
+  const hasNewImages = hasNewItemsInImageGroups(subject.imageGroups);
+  const hasNewVideos = hasNewItemsInSection(subject.videos);
+  return hasNewFiles || hasNewImages || hasNewVideos;
+};
+
+const markSectionAsViewed = (sectionKey) => {
+  if (!viewedSections[sectionKey]) {
+    setViewedSections(prev => ({
+      ...prev,
+      [sectionKey]: true
+    }));
+  }
+};
   
   // هذه هي الأخبار الثابتة - قم بتعديلها مباشرة في الكود
   const news = [
     {
-      id: 'news-1',
-      title: 'إعلان هام: مواعيد الامتحانات النهائية',
-      content: 'تنبيه لجميع طلاب الفرقة الأولى: مواعيد الامتحانات النهائية للفصل الدراسي الأول سوف تبدأ من يوم الأحد 15 يناير 2025. يرجى التأكد من جداول الامتحانات المعلنة على لوحة الإعلانات.',
-      date: '2024-12-01',
-      isNew: true
-    },
-    {
-      id: 'news-2',
-      title: 'ورشة عمل: كيفية استخدام الموقع',
-      content: 'سنوفر ورشة عمل يوم الخميس القادم الساعة 2 ظهرًا لشرح كيفية استخدام هذا الموقع للاستفادة القصوى من الملفات والموارد المتاحة. الحضور اختياري ولكن موصى به بشدة.',
-      date: '2024-11-28',
-      isNew: true
-    },
-    {
-      id: 'news-3',
-      title: 'تحديث جديد: إضافة ملفات البلاغة',
-      content: 'تم إضافة ملفات جديدة لمادة البلاغة العربية للفرقة الأولى، تشمل ملخصات شاملة وأسئلة امتحانات السنوات السابقة. نتمنى لكم التوفيق والنجاح.',
-      date: '2024-11-25',
+      id: 'new-1',
+      title: 'تنبيه عام',
+      content: 'تم تطوير الموقع ورفع الملفات والصور والفيديوهات وتم إضافة بعد المميزات لمعرفتها بالتفصيل أضغط على علامة الاستفهام التي في أعلى يمين صفحة الموقع',
+      date: '2025-12-10',
       isNew: true
     }
   ];
@@ -199,35 +225,35 @@ export default function App() {
             { 
               id: 'adab-book-001',
               name: 'مدخل إلى الأدب العربي الكتاب كامل', 
-              size: '9.3 MB',
+              size: '9.4 MB',
               url: '/files/year1/term1/adab/pdf/مدخل أدب عربي.pdf',
               isNew: true
             },
             { 
               id: 'adab-summary-001',
               name: 'تلخيص الأدب إلى صفحة ١٠٠ العام الماضي', 
-              size: '9.3 MB',
+              size: '41 MB',
               url: '/files/year1/term1/adab/pdf/تلخيص_الادب_لحد_ص_١٠٠.pdf',
               isNew: true
             },
             { 
               id: 'adab-mid-001',
               name: 'أدب مجموعة أولى', 
-              size: '41 MB',
+              size: '1.45 MB',
               url: '/files/year1/term1/adab/pdf/ميد ــ ادب مجموعه اولي.pdf',
               isNew: true
             },
             { 
               id: 'adab-mid-obj-001',
               name: 'أدب مجموعة أولى أسئلة موضوعية', 
-              size: '1.4 MB',
+              size: '2.5 MB',
               url: '/files/year1/term1/adab/pdf/موضوعي أدب مجموعه اولي.pdf',
               isNew: true
             },
             { 
               id: 'adab-poetry-001',
               name: 'مثال ملخص لنشأة الشعر', 
-              size: '0.2 MB',
+              size: '0.23 MB',
               url: '/files/year1/term1/adab/pdf/مثال ملخص لنشأة الشعر.pdf',
               isNew: true
             },
@@ -259,9 +285,63 @@ export default function App() {
                 },
                 { 
                   id: 'adab-sarf-img-001',
-                  name: 'خريطة ذهنية للصرف', 
-                  size: '750 KB',
+                  name: 'مقرر امتحان أدب ميد مجموعة ثانية وثالثة', 
+                  size: '325 KB',
                   url: '/files/year1/term1/adab/images/مقرر ميد مجموعة ثانية وثالثة.PNG',
+                  isNew: true
+                }
+              ]
+            },
+            {
+              groupName: 'تلخيص نشأة الشعر العربي',
+              images: [
+                { 
+                  id: 'adab-t-img-1',
+                  name: 'تلخيص ١', 
+                  size: '430 KB',
+                  url: '/files/year1/term1/adab/images/ت1.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-2',
+                  name: 'تخليص ٢', 
+                  size: '555 KB',
+                  url: '/files/year1/term1/adab/images/ت2.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-3',
+                  name: 'تلخيص ٣', 
+                  size: '566 KB',
+                  url: '/files/year1/term1/adab/images/ت3.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-4',
+                  name: 'تلخيص ٤', 
+                  size: '758 KB',
+                  url: '/files/year1/term1/adab/images/ت4.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-5',
+                  name: 'تلخيص ٥', 
+                  size: '673 KB',
+                  url: '/files/year1/term1/adab/images/ت5.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-6',
+                  name: 'تلخيص ٦', 
+                  size: '717 KB',
+                  url: '/files/year1/term1/adab/images/ت6.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'adab-t-img-7',
+                  name: 'تلخيص ٧', 
+                  size: '36 KB',
+                  url: '/files/year1/term1/adab/images/ت7.PNG',
                   isNew: true
                 }
               ]
@@ -270,9 +350,10 @@ export default function App() {
           videos: [
             { 
               id: 'adab-video-001',
-              name: 'ad', 
-              duration: '00:10',
-              url: '/files/year1/term1/adab/videos/ad.mp4',
+              name: 'فارغ', 
+              duration: '00:00',
+              size: '0 MB',
+              url: '/files/year1/term1/adab/videos/فارغ.mp4',
               isNew: true
             }
           ]
@@ -815,12 +896,25 @@ export default function App() {
     setExpandedTerms(prev => ({ ...prev, [key]: !prev[key] }));
   };
   const toggleSubject = (subjectId) => {
-    setExpandedSubjects(prev => ({ ...prev, [subjectId]: !prev[subjectId] }));
-  };
+  const isExpanding = !expandedSubjects[subjectId];
+  
+  setExpandedSubjects(prev => ({ ...prev, [subjectId]: isExpanding }));
+  
+  // تعليم المادة كمُشاهدة عند فتحها
+  if (isExpanding) {
+    markSectionAsViewed(`subject-${subjectId}`);
+  }
+};
   const toggleSection = (subjectId, section) => {
-    const key = `${subjectId}-${section}`;
-    setExpandedSections(prev => ({ ...prev, [key]: !prev[key] }));
-  };
+  const key = `${subjectId}-${section}`;
+  const isExpanding = !expandedSections[key];
+  
+  setExpandedSections(prev => ({ ...prev, [key]: isExpanding }));
+  
+  if (isExpanding) {
+    markSectionAsViewed(key);
+  }
+};
   const openPreview = (item, type) => {
   // إصلاح الرابط ليشمل PUBLIC_URL
   const fixedUrl = item.url && !item.url.startsWith('http') 
@@ -1021,8 +1115,10 @@ export default function App() {
         <li>⬇️ زر "التنزيل": تحميل مباشر لأي ملف بضغطة واحدة.</li>
         <li>📝 دفتر الملاحظات: أضف ملاحظاتك الشخصية، عدّلها، واحفظها محلياً  على جهازك ولا نستطيع رؤية ما كتبته — لن تُحذف حتى بعد الخروج!</li>
         <li>🌙 الوضع الليلي/النهاري: في أعلى الشمال أيقونة تبديل فوري حسب راحتك البصرية.</li>
-        <li>📢 خانة الأخبار: احصل على آخر التحديثات (مثل إضافة ملفات جديدة أو إعلانات هامة) مع علامة "جديد".</li>
+        <li>📢 خانة الأخبار: احصل على آخر التحديثات (مثل إضافة أخبار هامة) مع علامة "جديد".</li>
         <li>🔖 علامة "جديد": تظهر تلقائيًا بجانب كل ملف أو خبر جديد، وتختفي بعد المشاهدة.</li>
+        <li>🟢النقطة الخضراء: تظهر النقطة الخضراء فوق أيقونة الأخبار تلقائيًا عند نزول أخبار جديدة.</li>
+        <li>🟡النقطة الصفراء: تظهر النقطة الصفراء تلقائيًا في كلا من الخانة (المادة, الملفات, الصور, مجموعات الصور, الفيديوهات) عندما ينزل ملف أو صورة أو فيديو جديد.</li>
         <li>📱 دعم كامل للموبايل والكمبيوتر: واجهة متجاوبة تعمل بسلاسة على جميع الأجهزة.</li>
       </ul>
       
@@ -1059,7 +1155,7 @@ export default function App() {
             </div>
           </div>
           <p className={`text-center mt-4 text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>موقع ملفات كلية التربية شعبة اللغة العربية جامعة أسيوط</p>
-          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد بالذكاء الاصطناعي في مكان واحد كي يسهل على الطالب إيجادها</p>
+          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد والأسئلة بالذكاء الاصطناعي في مكان واحد كي يسهل على الطالب إيجادها</p>
           <p className={`text-center mt-4 text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>ولا تنسونا من صالح الدعاء والدعاء لوالدتي بالرحمة 🤲</p>
         </div>
       </header>
@@ -1506,7 +1602,12 @@ export default function App() {
                               >
                                 <div className="flex items-center gap-3">
                                   <FolderOpen size={24} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
-                                  <h4 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{subject.name}</h4>
+                                  <h4 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} flex items-center gap-2`}>
+  {subject.name}
+  {hasNewItemsInSubject(subject) && !viewedSections[`subject-${subject.id}`] && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse pl-2"></span>
+  )}
+</h4>
                                 </div>
                                 <ChevronDown size={24} className="transition-all duration-500" style={{ transform: expandedSubjects[subject.id] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                               </div>
@@ -1519,9 +1620,12 @@ export default function App() {
                                         className={`flex items-center justify-between p-3 ${darkMode ? 'bg-blue-800 hover:bg-blue-700' : 'bg-blue-800 hover:bg-blue-700'} rounded-lg cursor-pointer transition-all duration-500 transform hover:scale-[1.02]`}
                                       >
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
-                                          <FileText size={20} className="text-blue-600" />
-                                          الملفات ({subject.files.length})
-                                        </h5>
+  <FileText size={20} className="text-blue-600" />
+  الملفات ({subject.files.length})
+  {hasNewItemsInSection(subject.files) && !viewedSections[`${subject.id}-files`] && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
+  )}
+</h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-files`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
                                       <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-files`] ? '2000px' : '0', opacity: expandedSections[`${subject.id}-files`] ? '1' : '0' }}>
@@ -1541,7 +1645,9 @@ export default function App() {
                                                       )}
                                                     </span>
                                                   </p>
-                                                  <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>{file.size}</p>
+                                                  <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>
+  <span dir="ltr">{file.size}</span>
+</p>
                                                 </div>
                                               </div>
                                               <div className="flex gap-2 mr-4">
@@ -1576,9 +1682,12 @@ export default function App() {
                                         className={`flex items-center justify-between p-3 ${darkMode ? 'bg-green-800 hover:bg-green-700' : 'bg-green-800 hover:bg-green-700'} rounded-lg cursor-pointer transition-all duration-500 transform hover:scale-[1.02]`}
                                       >
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
-                                          <Image size={20} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
-                                          الصور ({subject.imageGroups.reduce((sum, g) => sum + g.images.length, 0)})
-                                        </h5>
+  <Image size={20} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
+  الصور ({subject.imageGroups.reduce((sum, g) => sum + g.images.length, 0)})
+  {hasNewItemsInImageGroups(subject.imageGroups) && !viewedSections[`${subject.id}-images`] && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
+  )}
+</h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-images`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
                                       <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '2000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0' }}>
@@ -1590,8 +1699,11 @@ export default function App() {
                                                 className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-200'} rounded-lg cursor-pointer transition-all duration-500 transform hover:scale-[1.02]`}
                                               >
                                                 <span className={`text-base font-semibold ${darkMode ? 'text-gray-200' : 'text-gray-700'} flex items-center gap-2`}>
-                                                  📁 {group.groupName} ({group.images.length})
-                                                </span>
+  📁 {group.groupName} ({group.images.length})
+  {group.images.some(img => img.isNew && img.id && !newFilesSeen[img.id]) && !viewedSections[`${subject.id}-imageGroup-${groupIdx}`] && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
+  )}
+</span>
                                                 <ChevronDown size={18} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                               </div>
                                               <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1500px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0' }}>
@@ -1611,7 +1723,9 @@ export default function App() {
                                                               )}
                                                             </span>
                                                           </p>
-                                                          <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>{image.size}</p>
+                                                          <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>
+     <span dir="ltr">{image.size}</span>
+   </p>
                                                         </div>
                                                       </div>
                                                       <div className="flex gap-2 mr-4">
@@ -1650,9 +1764,12 @@ export default function App() {
                                         className={`flex items-center justify-between p-3 ${darkMode ? 'bg-red-800 hover:bg-red-700' : 'bg-red-700 hover:bg-red-600'} rounded-lg cursor-pointer transition-all duration-500 transform hover:scale-[1.02]`}
                                       >
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
-                                          <Video size={20} className={darkMode ? 'text-pink-400' : 'text-red-600'} />
-                                          الفيديوهات ({subject.videos.length})
-                                        </h5>
+  <Video size={20} className={darkMode ? 'text-pink-400' : 'text-red-600'} />
+  الفيديوهات ({subject.videos.length})
+  {hasNewItemsInSection(subject.videos) && !viewedSections[`${subject.id}-videos`] && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
+  )}
+</h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-videos`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
                                       <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '2000px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0' }}>
@@ -1673,7 +1790,9 @@ export default function App() {
                                                     </span>
                                                   </p>
                                                   <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>المدة: {video.duration}</p>
-                                                  <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}> MB {video.size}</p>
+                                                  <p className={`text-xs ${darkMode ? 'text-gray-200' : 'text-gray-500'}`}>
+     <span dir="ltr">{video.size}</span>
+   </p>
                                                 </div>
                                               </div>
                                               <div className="flex gap-2 mr-4">
