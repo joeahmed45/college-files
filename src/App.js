@@ -215,7 +215,7 @@ const hasNewItemsInSubject = (subject) => {
       first: [
                 {
           id: 'f1-t1-s0',
-          name: 'تلخيصات وفيديوهات الفينال (قريبًا)',
+          name: 'تلخيصات وفيديوهات وأسئلة المنهج كاملًا (قريبًا)',
           files: [
             { 
               id: '',
