@@ -77,6 +77,7 @@ export default function App() {
       return [];
     }
   });
+  
   const [isNotePanelOpen, setIsNotePanelOpen] = useState(false);
   const [isCreatingNote, setIsCreatingNote] = useState(false);
   const [isViewingNote, setIsViewingNote] = useState(false);
@@ -188,36 +189,67 @@ const hasNewItemsInImageGroups = (imageGroups) => {
   );
 };
 
+// دالة للتحقق من وجود عناصر جديدة في المادة
 const hasNewItemsInSubject = (subject) => {
-  const hasNewFiles = hasNewItemsInSection(subject.files);
-  const hasNewImages = hasNewItemsInImageGroups(subject.imageGroups);
-  const hasNewVideos = hasNewItemsInSection(subject.videos);
+  const hasNewFiles = subject.files?.some(f => f.isNew && f.id && !newFilesSeen[f.id]);
+  const hasNewImages = subject.imageGroups?.some(g => 
+    g.images?.some(img => img.isNew && img.id && !newFilesSeen[img.id])
+  );
+  const hasNewVideos = subject.videos?.some(v => v.isNew && v.id && !newFilesSeen[v.id]);
+  
   return hasNewFiles || hasNewImages || hasNewVideos;
 };
 
-const markSectionAsViewed = (sectionKey) => {
-  if (!viewedSections[sectionKey]) {
-    setViewedSections(prev => ({
-      ...prev,
-      [sectionKey]: true
-    }));
-  }
-};
-  
   // هذه هي الأخبار الثابتة - قم بتعديلها مباشرة في الكود
   const news = [
     {
       id: 'new-1',
       title: 'تنبيه عام',
       content: 'تم تطوير الموقع ورفع الملفات والصور والفيديوهات وتم إضافة بعد المميزات لمعرفتها بالتفصيل أضغط على علامة الاستفهام التي في أعلى يمين صفحة الموقع',
-      date: '2025-12-10',
+      date: '2025-12-13',
       isNew: true
     }
   ];
-  
   const subjects = {
     first: {
       first: [
+                {
+          id: 'f1-t1-s0',
+          name: 'تلخيصات وفيديوهات الفينال (قريبًا)',
+          files: [
+            { 
+              id: '',
+              name: 'فارغ', 
+              size: '0 MB',
+              url: '/files/year1/term1/final/pdf/فارغ.pdf',
+              isNew: true
+            },
+          ],
+          imageGroups: [            
+            {
+              groupName: 'فارغ',
+              images: [
+                { 
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/final/images/فارغ.PNG',
+                  isNew: true
+                },
+              ]
+            }
+          ],
+          videos: [
+            { 
+              id: 'final-video-001',
+              name: 'فارغ', 
+              duration: '00:00',
+              url: '/files/year1/term1/final/videos/فارغ.mp4',
+              size: '0 MB',
+              isNew: true
+            }
+          ]
+        },
         {
           id: 'f1-t1-s1',
           name: 'مدخل إلى الأدب العربي د. حنان أبو قاسم',
@@ -230,7 +262,7 @@ const markSectionAsViewed = (sectionKey) => {
               isNew: true
             },
             { 
-              id: 'adab-summary-001',
+              id: 'adab-aaa-001',
               name: 'تلخيص الأدب إلى صفحة ١٠٠ العام الماضي', 
               size: '41 MB',
               url: '/files/year1/term1/adab/pdf/تلخيص_الادب_لحد_ص_١٠٠.pdf',
@@ -349,7 +381,7 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'adab-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
               size: '0 MB',
@@ -363,22 +395,22 @@ const markSectionAsViewed = (sectionKey) => {
           name: 'مدخل إلى البلاغة العربية د. أيمن عبد العظيم',
           files: [
             { 
-              id: 'balagha-book-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'balagha-bk-001',
+              name: 'مدخل إلى البلاغة العربية الكتاب كامل', 
+              size: '1.23 MB',
+              url: '/files/year1/term1/balagha/pdf/مدخل إلى البلاغة العربية.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'balagha-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/balagha/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -386,35 +418,113 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'balagha-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/balagha/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s3',
-          name: 'كذا',
+          name: 'مهنة التعليم وأدوار المعلم د. جملات محمد',
           files: [
             { 
-              id: 'subject3-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'mehna-file-001',
+              name: 'مهنة التعليم وأدوار المعلم الكتاب كامل', 
+              size: '1 MB',
+              url: '/files/year1/term1/mehna/pdf/مهنة التعليم وأدوار المعلم2024-2025.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-002',
+              name: 'تلخيص مهنة تعليم', 
+              size: '7 MB',
+              url: '/files/year1/term1/mehna/pdf/مهنه تعليم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-003',
+              name: 'مراحل تطور التعليم الفصل الأول', 
+              size: '0.12 MB',
+              url: '/files/year1/term1/mehna/pdf/مراحل تطور التعليم الفصل الأول.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-004',
+              name: 'المحاضرة الأولي لمهنة التعليم', 
+              size: '0.5 MB',
+              url: '/files/year1/term1/mehna/pdf/المحاضرة الأولي لمهنة التعليم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-005',
+              name: 'المحاضرة الثانية مهنة التعليم', 
+              size: '0.56 MB',
+              url: '/files/year1/term1/mehna/pdf/المحاضرة الثانية مهنة التعليم (1).pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-006',
+              name: 'المحاضرة الثانية والثالثة مهنة التعليم', 
+              size: '6.6 MB',
+              url: '/files/year1/term1/mehna/pdf/المحاضرة الثانية والثالثة مهنة التعليم 1.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-007',
+              name: 'محاضرة (4) اتجاهات معاصرة في إعداد المعلم', 
+              size: '0.74 MB',
+              url: '/files/year1/term1/mehna/pdf/محاضرة (4) اتجاهات معاصرة في إعداد المعلم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-008',
+              name: 'محاضرة (5) اتجاهات معاصرة في إعداد المعلم', 
+              size: '1.1 MB',
+              url: '/files/year1/term1/mehna/pdf/محاضرة (5) اتجاهات معاصرة في إعداد المعلم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-009',
+              name: 'الفصل الثالث التنمية المهنية للمعلم', 
+              size: '1 MB',
+              url: '/files/year1/term1/mehna/pdf/الفصل الثالث التنمية المهنية للمعلم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-010',
+              name: 'مهنة التعليم كلها', 
+              size: '4.8 MB',
+              url: '/files/year1/term1/mehna/pdf/مهنة التعليم كلها.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-011',
+              name: 'ترخيص مزاولة المهنة', 
+              size: '0.28 MB',
+              url: '/files/year1/term1/mehna/pdf/ترخيص مزاولة المهنة.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mehna-file-012',
+              name: 'تحضير على أخر جزء من الفصل الثالث مهنة التعليم', 
+              size: '0.17 MB',
+              url: '/files/year1/term1/mehna/pdf/تحضير على أخر جزء من الفصل الثالث مهنة التعليم.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject3-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/mehna/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -422,35 +532,209 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject3-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/mehna/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
-            }
+            },
           ]
         },
         {
           id: 'f1-t1-s4',
-          name: 'كذا',
+          name: 'المنهج المدرسي أ.د/ حسن عمران',
           files: [
             { 
-              id: 'subject4-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'manhag-file-001',
+              name: 'المنهج المدرسي الكتاب كامل', 
+              size: '65 MB',
+              url: '/files/year1/term1/manhag/pdf/منهج مدرسي د. حسن عمران.pdf',
+              isNew: true
+            },
+            { 
+              id: 'manhag-file-002',
+              name: 'منهج مدرسي الفصل الأول مقرر الميد ترم', 
+              size: '30 MB',
+              url: '/files/year1/term1/manhag/pdf/منهج مدرسي مقرر الميد ترم.pdf',
+              isNew: true
+            },
+            { 
+              id: 'manhag-file-003',
+              name: 'تلخيص الفصل الأول منهج مدرسي ميد', 
+              size: '0.1 MB',
+              url: '/files/year1/term1/manhag/pdf/تلخيص الفصل الأول منهج مدرسي.pdf',
+              isNew: true
+            },
+            { 
+              id: 'manhag-file-004',
+              name: 'المنهج المدرسي أولى جميع الشعب', 
+              size: '1.3 MB',
+              url: '/files/year1/term1/manhag/pdf/المنهج_المدرسي_أولي_جميع_الشعب.pdf',
+              isNew: true
+            },
+            { 
+              id: 'manhag-file-005',
+              name: 'منهج المدرسي فصل ١ و ٢ و ٣', 
+              size: '1.3 MB',
+              url: '/files/year1/term1/manhag/pdf/منهج_المدرسي_فصل١_و_٢_و_٣_د._عنايات.pdf',
+              isNew: true
+            },
+            { 
+              id: 'manhag-file-006',
+              name: 'تلخيص الفصل ١ و ٢ المنهج المدرسي', 
+              size: '4.1 MB',
+              url: '/files/year1/term1/manhag/pdf/تلخيص الفصل ١-٢المنهج  المدرسي.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'امتحان قصير على الفصل الأول منهج مدرسي',
               images: [
                 { 
-                  id: 'subject4-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: 'exam-1',
+                  name: 'سؤال ١', 
+                  size: '19.6 KB',
+                  url: '/files/year1/term1/manhag/images/كويز1.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-2',
+                  name: 'سؤال ٢', 
+                  size: '20 KB',
+                  url: '/files/year1/term1/manhag/images/كويز2.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-3',
+                  name: 'سؤال ٣', 
+                  size: '20 KB',
+                  url: '/files/year1/term1/manhag/images/كويز3.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-4',
+                  name: 'سؤال ٤', 
+                  size: '20.5 KB',
+                  url: '/files/year1/term1/manhag/images/كويز4.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-5',
+                  name: 'سؤال ٥', 
+                  size: '20.5 KB',
+                  url: '/files/year1/term1/manhag/images/كويز5.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-6',
+                  name: 'سؤال ٦', 
+                  size: '19 KB',
+                  url: '/files/year1/term1/manhag/images/كويز6.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-7',
+                  name: 'سؤال ٧', 
+                  size: '21 KB',
+                  url: '/files/year1/term1/manhag/images/كويز7.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-8',
+                  name: 'سؤال ٨', 
+                  size: '18.5 KB',
+                  url: '/files/year1/term1/manhag/images/كويز8.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-9',
+                  name: 'سؤال ٩', 
+                  size: '19 KB',
+                  url: '/files/year1/term1/manhag/images/كويز9.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'exam-10',
+                  name: 'سؤال ١٠', 
+                  size: '21 KB',
+                  url: '/files/year1/term1/manhag/images/كويز10.PNG',
+                  isNew: true
+                },
+              ]
+            },
+            {
+              groupName: 'إجابات على الامتحان القصير على الفصل الأول منهج مدرسي',
+              images: [
+                { 
+                  id: 'answer-1',
+                  name: 'إجابة رقم ١', 
+                  size: '20 KB',
+                  url: '/files/year1/term1/manhag/images/ج1.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-2',
+                  name: 'إجابة رقم ٢', 
+                  size: '22 KB',
+                  url: '/files/year1/term1/manhag/images/ج2.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-3',
+                  name: 'إجابة رقم ٣', 
+                  size: '21 KB',
+                  url: '/files/year1/term1/manhag/images/ج3.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-4',
+                  name: 'إجابة رقم ٤', 
+                  size: '22 KB',
+                  url: '/files/year1/term1/manhag/images/ج4.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-5',
+                  name: 'إجابة رقم ٥', 
+                  size: '21.5 KB',
+                  url: '/files/year1/term1/manhag/images/ج5.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-6',
+                  name: 'إجابة رقم ٦', 
+                  size: '20.5 KB',
+                  url: '/files/year1/term1/manhag/images/ج6.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-7',
+                  name: 'إجابة رقم ٧', 
+                  size: '21.7 KB',
+                  url: '/files/year1/term1/manhag/images/ج7.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-8',
+                  name: 'إجابة رقم ٨', 
+                  size: '19.5 KB',
+                  url: '/files/year1/term1/manhag/images/ج8.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-9',
+                  name: 'إجابة رقم ٩', 
+                  size: '21 KB',
+                  url: '/files/year1/term1/manhag/images/ج9.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'answer-10',
+                  name: 'إجابة رقم ١٠', 
+                  size: '23 KB',
+                  url: '/files/year1/term1/manhag/images/ج10.PNG',
                   isNew: true
                 },
               ]
@@ -458,35 +742,78 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject4-video-001',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              id: 'manhag-video-001',
+              name: 'فيديو تلخيص الفصل الأول منهج مدرسي على امتحان الميد ترم', 
+              duration: '07:09',
+              url: '/files/year1/term1/manhag/videos/تطور_المنهج__من_المحتوى_للخبرة.mp4',
+              size: '35.5 MB',
               isNew: true
-            }
+            },
           ]
         },
         {
-          id: 'f1-t1-s5',
-          name: 'كذا',
+id: 'f1-t1-s5',
+          name: 'المكتبة العربية د. عاطف عبد العليم',
           files: [
             { 
-              id: 'subject5-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'maktba-file-001',
+              name: 'المكتبة العربية الكتاب كامل', 
+              size: '10 MB',
+              url: '/files/year1/term1/maktba/pdf/المكتبة العربية المستوى الأول عام.pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-002',
+              name: 'كتاب الحيوان للجاحظ', 
+              size: '53 MB',
+              url: '/files/year1/term1/maktba/pdf/كتاب الحيوان.pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-003',
+              name: 'كتاب الكامل للمبرّد', 
+              size: '43 MB',
+              url: '/files/year1/term1/maktba/pdf/كتاب الكامل.pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-004',
+              name: 'المكتبة العربية', 
+              size: '2.7 MB',
+              url: '/files/year1/term1/maktba/pdf/المكتبه العربيه .pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-005',
+              name: 'شرح المكتبة العربية من المحاضرة ١ إلى ٦', 
+              size: '6.1 MB',
+              url: '/files/year1/term1/maktba/pdf/شرح المكتبة العربية من المحاضرة ١ إلى ٦.pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-006',
+              name: 'مذكرة مكتبة عربية', 
+              size: '6.2 MB',
+              url: '/files/year1/term1/maktba/pdf/مذكرة مكتبة عربية.pdf',
+              isNew: true
+            },
+            { 
+              id: 'maktba-file-007',
+              name: 'المكتبة العربية امتحان أعمال السنة', 
+              size: '0.85 MB',
+              url: '/files/year1/term1/maktba/pdf/المكتبة العربية امتحان أعمال السنة.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject5-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/maktba/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -494,35 +821,64 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject5-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/maktba/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
-            }
+            },
           ]
         },
         {
           id: 'f1-t1-s6',
-          name: 'كذا',
+          name: 'عملي مهنة التعليم وأدوار المعلم د. نوال',
           files: [
             { 
-              id: 'subject6-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: '3mly-file-001',
+              name: 'مهنة التعليم وأدوار المعلم تطبيقي فاينال الكتاب كامل', 
+              size: '0.5 MB',
+              url: '/files/year1/term1/3mly/pdf/مهنة التعليم وأدوار المعلم تطبيقي.pdf',
+              isNew: true
+            },
+            { 
+              id: '3mly-file-002',
+              name: 'تلخيص مهنة التعليم وأدوار المعلم تطبيقي فاينال', 
+              size: '0.12 MB',
+              url: '/files/year1/term1/3mly/pdf/تلخيص مهنة التعليم التطبيقي فاينال.pdf',
+              isNew: true
+            },
+            { 
+              id: '3mly-file-003',
+              name: 'عملي مهنة التعليم وأدوار المعلم فصل أول ميد', 
+              size: '5 MB',
+              url: '/files/year1/term1/3mly/pdf/عملى مهنة التعليم ميد.pdf',
+              isNew: true
+            },
+            { 
+              id: '3mly-file-004',
+              name: 'تلخيص عملي مهنة التعليم الميد ما عدا الفصل الأول', 
+              size: '0.12 MB',
+              url: '/files/year1/term1/3mly/pdf/تلخيص عملي مهنة التعليم ميد.pdf',
+              isNew: true
+            },
+            { 
+              id: '3mly-file-005',
+              name: 'سكشن مهنه التعليم وأدوار المعلم', 
+              size: '1.6 MB',
+              url: '/files/year1/term1/3mly/pdf/سكشن مهنه التعليم وأدوار المعلم.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject6-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/3mly/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -530,35 +886,72 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject6-video-001',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              id: '3mly-video-001',
+              name: 'تلخيص مهنة التعليم وأدوار المعلم تطبيقي فاينال', 
+              duration: '05:43',
+              url: '/files/year1/term1/3mly/videos/رسالة_المعلم__ركيزة_تحت_الضغط.mp4',
+              size: '30.5 MB',
+              isNew: true
+            },
+            { 
+              id: '3mly-video-002',
+              name: 'تلخيص مهنة التعليم ميد ترم ما عدا الفصل الأول', 
+              duration: '06:08',
+              url: '/files/year1/term1/3mly/videos/مهنة_التعليم__رسالة_وتحدي.mp4',
+              size: '29 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s7',
-          name: 'كذا',
+          name: 'اللغة العربية د. أماني حامد',
           files: [
             { 
-              id: 'subject7-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: '3rby-file-001',
+              name: 'اللغة العربية الكتاب كامل', 
+              size: '2.5 MB',
+              url: '/files/year1/term1/3rby/pdf/اللغة العربية.pdf',
+              isNew: true
+            },
+            { 
+              id: '3rby-file-002',
+              name: 'مذكرة اللغة العربية', 
+              size: '0.4 MB',
+              url: '/files/year1/term1/3rby/pdf/مذكرة اللغة العربية.pdf',
+              isNew: true
+            },
+            { 
+              id: '3rby-file-003',
+              name: 'مذكرة اللغة العربية', 
+              size: '13.6 MB',
+              url: '/files/year1/term1/3rby/pdf/مذكرة اللغة العربية-1-1.pdf',
+              isNew: true
+            },
+            { 
+              id: '3rby-file-004',
+              name: 'نموذج ١ تكليف التقرير', 
+              size: '0.14 MB',
+              url: '/files/year1/term1/3rby/pdf/نموذج تقرير 1.pdf',
+              isNew: true
+            },
+            { 
+              id: '3rby-file-005',
+              name: 'نموذج ٢ تكليف التقرير', 
+              size: '0.13 MB',
+              url: '/files/year1/term1/3rby/pdf/نموذج تقرير 2.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject7-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/3rby/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -566,35 +959,64 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject7-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/3rby/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s8',
-          name: 'كذا',
+          name: 'مدخل إلى النحو العربي د. محمد حسين',
           files: [
             { 
-              id: 'subject8-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'nahw-file-001',
+              name: 'مدخل إلى النحو العربي الكتاب كامل', 
+              size: '2.8 MB',
+              url: '/files/year1/term1/nahw/pdf/مدخل إلى النحو العربي كاملا.pdf',
+              isNew: true
+            },
+            { 
+              id: 'nahw-file-002',
+              name: 'مدخل الى النحو العربي ١', 
+              size: '7.1 MB',
+              url: '/files/year1/term1/nahw/pdf/مدخل الى النحو العربي..pdf',
+              isNew: true
+            },
+            { 
+              id: 'nahw-file-003',
+              name: 'مدخل الى النحو العربي ٢', 
+              size: '2 MB',
+              url: '/files/year1/term1/nahw/pdf/مدخل الى النحو العربي2.pdf',
+              isNew: true
+            },
+            { 
+              id: 'nahw-file-004',
+              name: 'جزء أول نحو', 
+              size: '5.7 MB',
+              url: '/files/year1/term1/nahw/pdf/جزء اول نحو.pdf',
+              isNew: true
+            },
+            { 
+              id: 'nahw-file-005',
+              name: 'نحو وصرف دكتور حسين', 
+              size: '4.7 MB',
+              url: '/files/year1/term1/nahw/pdf/نحو وصرف دكتور حسين.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject8-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/nahw/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -602,35 +1024,57 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject8-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/nahw/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s9',
-          name: 'كذا',
+          name: 'علوم قرآن د. محمد حجاجي',
           files: [
             { 
-              id: 'subject9-file-001',
-              name: ' مد خل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'quran-file-001',
+              name: 'علوم قرآن الكتاب كامل', 
+              size: '1.6 MB',
+              url: '/files/year1/term1/quran/pdf/علوم القرآن كاملا.pdf',
+              isNew: true
+            },
+            { 
+              id: 'quran-file-002',
+              name: 'علوم قرآن', 
+              size: '0.5 MB',
+              url: '/files/year1/term1/quran/pdf/علوم قرآن .pdf',
+              isNew: true
+            },
+            { 
+              id: 'quran-file-003',
+              name: 'علوم القرآن محاضرة ٦', 
+              size: '1.3 MB',
+              url: '/files/year1/term1/quran/pdf/علوم القرآن محاضرة ٦.pdf',
+              isNew: true
+            },
+            { 
+              id: 'quran-file-004',
+              name: 'علوم القرآن ٧', 
+              size: '2.2 MB',
+              url: '/files/year1/term1/quran/pdf/علوم القرآن ٧.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject9-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/quran/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -638,35 +1082,43 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject9-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/quran/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s10',
-          name: 'كذا',
+          name: 'مهارات التواصل الصفي د. صابر علام',
           files: [
             { 
-              id: 'subject10-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'mharat-file-001',
+              name: 'مهارات التواصل الصفي الكتاب كامل', 
+              size: '40 MB',
+              url: '/files/year1/term1/mharat/pdf/أولى عام عربي مهارات التواصل الصفي د.صابر علام.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mharat-file-002',
+              name: 'تواصل صفي', 
+              size: '0.7 MB',
+              url: '/files/year1/term1/mharat/pdf/تواصل صفى .pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject10-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/mharat/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -674,35 +1126,120 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject10-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/mharat/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s11',
-          name: 'كذا',
+          name: 'الاتجاهات المعاصرة في علم النفس د. عادل سمير',
           files: [
             { 
-              id: 'subject11-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'atgahat-file-001',
+              name: 'اتجاهات معاصرة الكتاب كامل', 
+              size: '2 MB',
+              url: '/files/year1/term1/atgahat/pdf/اتجاهات معاصرة في علم النفس جميع الشعب.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-002',
+              name: 'محاضرة ١ اتجاهات معاصرة', 
+              size: '0.37 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 1 اتجاهات معاصرة.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-003',
+              name: 'محاضرة ١ اتجاهات معاصرة علم نفس', 
+              size: '0.33 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 1 اتجاهات معاصرة علم نفس.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-004',
+              name: 'محاضرة ٢ اتجاهات معاصرة', 
+              size: '0.3 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 2 اتجاهات معاصرة 2025.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-005',
+              name: 'محاضرة ٢ التفكير الايجابي', 
+              size: '0.26 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 2 التفكير الايجابي.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-006',
+              name: 'محاضرة ٣ اتجاهات معاصرة', 
+              size: '0.37 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 3 اتجاهات معاصرة 2025.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-007',
+              name: 'محاضرة ٣ ابداع انفعالي', 
+              size: '0.34 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 3 ابداع انفعالي.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-008',
+              name: 'محاضرة ٤ اتجاهات معاصرة', 
+              size: '0.3 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 4 اتجاهات معاصرة.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-009',
+              name: 'محاضرة ٤ تسويف نشط وعزو سببي', 
+              size: '0.4 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 4 تسويف نشط وعزو سببي.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-010',
+              name: 'محاضرة ٥ اتجاهات معاصرة', 
+              size: '0.37 MB',
+              url: '/files/year1/term1/atgahat/pdf/محاضرة 5 اتجاهات معاصرة.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-011',
+              name: 'مقرر اتجاهات معاصرة د. عادل ٢٠٢٤', 
+              size: '1.7 MB',
+              url: '/files/year1/term1/atgahat/pdf/مقرر اتجاهات معاصرة د عادل 2024.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-012',
+              name: 'تلخيص محاضرات علم النفس', 
+              size: '6.6 MB',
+              url: '/files/year1/term1/atgahat/pdf/تلخيص محضرات علم النفس.pdf',
+              isNew: true
+            },
+            { 
+              id: 'atgahat-file-013',
+              name: 'للتدريب', 
+              size: '0.25 MB',
+              url: '/files/year1/term1/atgahat/pdf/للتدريب.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject11-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/balagha/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -710,35 +1247,50 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject11-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
               url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s12',
-          name: 'كذا',
+          name: 'مدخل إلى النقد العربي أ.د/ سعيد فرغلي',
           files: [
             { 
-              id: 'subject12-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'nakd-file-001',
+              name: 'مدخل إلى النقد العربي الكتاب كامل', 
+              size: '2.7 MB',
+              url: '/files/year1/term1/nakd/pdf/مدخل إلى النقد العربي.pdf',
+              isNew: true
+            },
+            { 
+              id: 'nakd-file-002',
+              name: 'نقد الميد', 
+              size: '15.8 MB',
+              url: '/files/year1/term1/nakd/pdf/نقد الميد.pdf',
+              isNew: true
+            },
+            { 
+              id: 'nakd-file-003',
+              name: 'النقد الأدبي المحاضرتان الأولى والثانية', 
+              size: '0.7 MB',
+              url: '/files/year1/term1/nakd/pdf/مدخل إلى النقد الأدبي المحاضرتان الأولى والثانية.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject12-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/nakd/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -746,35 +1298,57 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject12-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/nakd/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s13',
-          name: 'كذا',
+          name: 'تفسير وتجويد د. محمد عبد الرازق',
           files: [
             { 
-              id: 'subject13-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'tafser-file-001',
+              name: 'فن التجويد الكتاب كامل', 
+              size: '2.6 MB',
+              url: '/files/year1/term1/tafser/pdf/فن التجويد.pdf',
+              isNew: true
+            },
+            { 
+              id: 'tafser-file-002',
+              name: 'مذكرة مناهج التفسي معدلة الكتاب كامل', 
+              size: '1.3 MB',
+              url: '/files/year1/term1/tafser/pdf/مذكرة مناهج التفسير معدلة.pdf',
+              isNew: true
+            },
+            { 
+              id: 'tafser-file-003',
+              name: 'تجويد الميد', 
+              size: '12.5 MB',
+              url: '/files/year1/term1/tafser/pdf/تجويد الميد.pdf',
+              isNew: true
+            },
+            { 
+              id: 'tafser-file-004',
+              name: 'تفسير أولى تربية', 
+              size: '1.3 MB',
+              url: '/files/year1/term1/tafser/pdf/تفسير أولى تربية.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject13-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/tafser/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -782,35 +1356,36 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject13-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/tafser/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s14',
-          name: 'كذا',
+          name: 'قضايا مجتمعية',
           files: [
             { 
-              id: 'subject14-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'kdaya-file-001',
+              name: 'قضايا مجتمعية الكتاب كامل', 
+              size: '2.7 MB',
+              url: '/files/year1/term1/kdaya/pdf/قضايا مجتمعية جزء السكان اولى جميع الشعب.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'فارغ',
               images: [
                 { 
-                  id: 'subject14-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: '',
+                  name: 'فارغ', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/kdaya/images/فارغ.PNG',
                   isNew: true
                 },
               ]
@@ -818,35 +1393,57 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject14-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              url: '/files/year1/term1/kdaya/videos/فارغ.mp4',
+              size: '0 MB',
               isNew: true
             }
           ]
         },
         {
           id: 'f1-t1-s15',
-          name: 'كذا',
+          name: 'ملفات أخرى',
           files: [
             { 
-              id: 'subject15-file-001',
-              name: 'مدخل', 
-              size: ' MB',
-              url: '/files/year1/term1/balagha/pdf/goma.pdf',
+              id: 'mlfat-file-001',
+              name: 'جدول المحاضرات الحديث بعد أخر التعديلات', 
+              size: '0.13 MB',
+              url: '/files/year1/term1/mlfat/pdf/جدول محاضرات بعد التعديلات.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mlfat-file-002',
+              name: 'لائحة أسماء الطلاب المقيدين بشعبة اللغة العربية فرقة أولى', 
+              size: '0.2 MB',
+              url: '/files/year1/term1/mlfat/pdf/قائمة أسماء شعبة لغة عربية فرقة أولى.pdf',
+              isNew: true
+            },
+            { 
+              id: 'mlfat-file-003',
+              name: 'لائحة أسماء الطلاب وأرقام الجلوس أولى لغة عربية', 
+              size: '0.5 MB',
+              url: '/files/year1/term1/mlfat/pdf/لائحة أسماء الطلاب وأرقام الجلوس أولى لغة عربية .pdf',
+              isNew: true
+            },
+            { 
+              id: 'mlfat-file-004',
+              name: 'أكواد لوائح السنوات والمستويات على Microsoft Teams', 
+              size: '0.03 MB',
+              url: '/files/year1/term1/mlfat/pdf/أكواد لوائح السنوات والمستويات على Microsoft Teams.pdf',
               isNew: true
             },
           ],
           imageGroups: [            
             {
-              groupName: 'مُقررات',
+              groupName: 'صور أخرى',
               images: [
                 { 
-                  id: 'subject15-img-001',
-                  name: 'مقرر', 
-                  size: ' KB',
-                  url: '/files/year1/term1/balagha/images/goma.PNG',
+                  id: 'mlfat-img-001',
+                  name: 'QR Code for the Website', 
+                  size: '0 KB',
+                  url: '/files/year1/term1/mlfat/images/QR Code College Files Website.PNG',
                   isNew: true
                 },
               ]
@@ -854,10 +1451,11 @@ const markSectionAsViewed = (sectionKey) => {
           ],
           videos: [
             { 
-              id: 'subject15-video-001',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/adab/videos/فارغ.mp4',
+              id: 'mlfat-video-001',
+              name: 'College Files Website', 
+              duration: '00:08',
+              url: '/files/year1/term1/mlfat/videos/ad.mp4',
+              size: '8.7 MB',
               isNew: true
             }
           ]
@@ -900,9 +1498,12 @@ const markSectionAsViewed = (sectionKey) => {
   
   setExpandedSubjects(prev => ({ ...prev, [subjectId]: isExpanding }));
   
-  // تعليم المادة كمُشاهدة عند فتحها
+  // تعليم المادة كمُشاهدة بمجرد فتحها
   if (isExpanding) {
-    markSectionAsViewed(`subject-${subjectId}`);
+    setViewedSections(prev => ({
+      ...prev,
+      [`subject-${subjectId}`]: true
+    }));
   }
 };
   const toggleSection = (subjectId, section) => {
@@ -911,8 +1512,12 @@ const markSectionAsViewed = (sectionKey) => {
   
   setExpandedSections(prev => ({ ...prev, [key]: isExpanding }));
   
+  // تعليم القسم كمُشاهد بمجرد فتحه
   if (isExpanding) {
-    markSectionAsViewed(key);
+    setViewedSections(prev => ({
+      ...prev,
+      [key]: true
+    }));
   }
 };
   const openPreview = (item, type) => {
@@ -1117,8 +1722,8 @@ const markSectionAsViewed = (sectionKey) => {
         <li>🌙 الوضع الليلي/النهاري: في أعلى الشمال أيقونة تبديل فوري حسب راحتك البصرية.</li>
         <li>📢 خانة الأخبار: احصل على آخر التحديثات (مثل إضافة أخبار هامة) مع علامة "جديد".</li>
         <li>🔖 علامة "جديد": تظهر تلقائيًا بجانب كل ملف أو خبر جديد، وتختفي بعد المشاهدة.</li>
-        <li>🟢النقطة الخضراء: تظهر النقطة الخضراء فوق أيقونة الأخبار تلقائيًا عند نزول أخبار جديدة.</li>
-        <li>🟡النقطة الصفراء: تظهر النقطة الصفراء تلقائيًا في كلا من الخانة (المادة, الملفات, الصور, مجموعات الصور, الفيديوهات) عندما ينزل ملف أو صورة أو فيديو جديد.</li>
+        <li>🟢النقطة الخضراء: تظهر النقطة الخضراء فوق أيقونة الأخبار تلقائيًا عند نزول أخبار جديدة وتختفي تلقائيًا بمجرد فتح جميع الأخبار.</li>
+        <li>🟡النقطة الصفراء: تظهر النقطة الصفراء تلقائيًا في كلا من الخانة (المادة, الملفات, الصور, مجموعات الصور, الفيديوهات) عندما ينزل ملف أو صورة أو فيديو جديد وتختفي تلقائيًا بمجرد الضغط على علامة العين أو تنزيل كل المحتوى الجديد.</li>
         <li>📱 دعم كامل للموبايل والكمبيوتر: واجهة متجاوبة تعمل بسلاسة على جميع الأجهزة.</li>
       </ul>
       
@@ -1602,12 +2207,14 @@ const markSectionAsViewed = (sectionKey) => {
                               >
                                 <div className="flex items-center gap-3">
                                   <FolderOpen size={24} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
-                                  <h4 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} flex items-center gap-2`}>
-  {subject.name}
-  {hasNewItemsInSubject(subject) && !viewedSections[`subject-${subject.id}`] && (
-    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse pl-2"></span>
+                                  <div className="flex items-center gap-2">
+  <h4 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{subject.name}</h4>
+  
+  {/* النقطة الصفراء للمادة - تظهر عند وجود ملفات جديدة */}
+  {hasNewItemsInSubject(subject) && (
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
   )}
-</h4>
+</div>
                                 </div>
                                 <ChevronDown size={24} className="transition-all duration-500" style={{ transform: expandedSubjects[subject.id] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                               </div>
@@ -1622,7 +2229,7 @@ const markSectionAsViewed = (sectionKey) => {
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
   <FileText size={20} className="text-blue-600" />
   الملفات ({subject.files.length})
-  {hasNewItemsInSection(subject.files) && !viewedSections[`${subject.id}-files`] && (
+  {hasNewItemsInSection(subject.files) && (
     <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
   )}
 </h5>
@@ -1684,7 +2291,9 @@ const markSectionAsViewed = (sectionKey) => {
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
   <Image size={20} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
   الصور ({subject.imageGroups.reduce((sum, g) => sum + g.images.length, 0)})
-  {hasNewItemsInImageGroups(subject.imageGroups) && !viewedSections[`${subject.id}-images`] && (
+  
+  {/* النقطة الصفراء لقسم الصور */}
+  {hasNewItemsInImageGroups(subject.imageGroups) && (
     <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
   )}
 </h5>
@@ -1700,7 +2309,9 @@ const markSectionAsViewed = (sectionKey) => {
                                               >
                                                 <span className={`text-base font-semibold ${darkMode ? 'text-gray-200' : 'text-gray-700'} flex items-center gap-2`}>
   📁 {group.groupName} ({group.images.length})
-  {group.images.some(img => img.isNew && img.id && !newFilesSeen[img.id]) && !viewedSections[`${subject.id}-imageGroup-${groupIdx}`] && (
+  
+  {/* النقطة الصفراء لمجموعة الصور */}
+  {group.images?.some(img => img.isNew && img.id && !newFilesSeen[img.id]) && (
     <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
   )}
 </span>
@@ -1766,7 +2377,7 @@ const markSectionAsViewed = (sectionKey) => {
                                         <h5 className={`text-lg font-bold ${darkMode ? 'text-gray-200' : 'text-gray-100'} flex items-center gap-2`}>
   <Video size={20} className={darkMode ? 'text-pink-400' : 'text-red-600'} />
   الفيديوهات ({subject.videos.length})
-  {hasNewItemsInSection(subject.videos) && !viewedSections[`${subject.id}-videos`] && (
+  {hasNewItemsInSection(subject.videos) && (
     <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
   )}
 </h5>
@@ -1909,14 +2520,14 @@ const markSectionAsViewed = (sectionKey) => {
           </div>
         </div>
       )}
-      <footer className="bg-gray-800 text-white mt-3.5 py-8">
+      <footer className="bg-gray-800 text-white mt-2.5 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm mt-1">مبرمج هذا الموقع: يوسف أحمد صالح</p>
           <a 
             href="https://docs.google.com/forms/d/e/1FAIpQLSexdXzeXl8kGW2Oo-11IuFSIrWxFElegE7xlc2PqtaYQUitgw/viewform" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-10 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 mt-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-10 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
