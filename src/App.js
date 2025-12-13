@@ -241,7 +241,7 @@ const hasNewItemsInSubject = (subject) => {
           ],
           videos: [
             { 
-              id: 'final-video-001',
+              id: '',
               name: 'فارغ', 
               duration: '00:00',
               url: '/files/year1/term1/final/videos/فارغ.mp4',
@@ -1721,6 +1721,7 @@ id: 'f1-t1-s5',
         <li>📝 دفتر الملاحظات: أضف ملاحظاتك الشخصية، عدّلها، واحفظها محلياً  على جهازك ولا نستطيع رؤية ما كتبته — لن تُحذف حتى بعد الخروج!</li>
         <li>🌙 الوضع الليلي/النهاري: في أعلى الشمال أيقونة تبديل فوري حسب راحتك البصرية.</li>
         <li>📢 خانة الأخبار: احصل على آخر التحديثات (مثل إضافة أخبار هامة) مع علامة "جديد".</li>
+        <li>📌تنبيه: عندما تكتب ملاحظة في خانة الملاحظات تأكد من أنك كتبت عنوان الملاحظة في الخانة العلوية وكتابة محتوى الملاحظة في الخانة السفلية لإن إذا تركت أي خانة منهما فارغة عندما تضغط على كلمة حفظ لن تحفظ.</li>
         <li>🔖 علامة "جديد": تظهر تلقائيًا بجانب كل ملف أو خبر جديد، وتختفي بعد المشاهدة.</li>
         <li>🟢النقطة الخضراء: تظهر النقطة الخضراء فوق أيقونة الأخبار تلقائيًا عند نزول أخبار جديدة وتختفي تلقائيًا بمجرد فتح جميع الأخبار.</li>
         <li>🟡النقطة الصفراء: تظهر النقطة الصفراء تلقائيًا في كلا من الخانة (المادة, الملفات, الصور, مجموعات الصور, الفيديوهات) عندما ينزل ملف أو صورة أو فيديو جديد وتختفي تلقائيًا بمجرد الضغط على علامة العين أو تنزيل كل المحتوى الجديد.</li>
@@ -2208,11 +2209,11 @@ id: 'f1-t1-s5',
                                 <div className="flex items-center gap-3">
                                   <FolderOpen size={24} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
                                   <div className="flex items-center gap-2">
-  <h4 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{subject.name}</h4>
+  <h4 className={`text-xl font-bold pl-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{subject.name}</h4>
   
   {/* النقطة الصفراء للمادة - تظهر عند وجود ملفات جديدة */}
   {hasNewItemsInSubject(subject) && (
-    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse"></span>
+    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse pl-2 translate-x-2"></span>
   )}
 </div>
                                 </div>
