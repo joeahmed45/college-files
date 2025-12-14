@@ -262,7 +262,7 @@ const hasNewItemsInSubject = (subject) => {
               isNew: true
             },
             { 
-              id: 'adab-aaa-001',
+              id: 'adab-mid-001',
               name: 'تلخيص الأدب إلى صفحة ١٠٠ العام الماضي', 
               size: '41 MB',
               url: '/files/year1/term1/adab/pdf/تلخيص_الادب_لحد_ص_١٠٠.pdf',
@@ -316,7 +316,7 @@ const hasNewItemsInSubject = (subject) => {
                   isNew: true
                 },
                 { 
-                  id: 'adab-sarf-img-001',
+                  id: 'adab-mid-img-002',
                   name: 'مقرر امتحان أدب ميد مجموعة ثانية وثالثة', 
                   size: '325 KB',
                   url: '/files/year1/term1/adab/images/مقرر ميد مجموعة ثانية وثالثة.PNG',
@@ -395,10 +395,17 @@ const hasNewItemsInSubject = (subject) => {
           name: 'مدخل إلى البلاغة العربية د. أيمن عبد العظيم',
           files: [
             { 
-              id: 'balagha-bk-001',
+              id: 'balagha-book-001',
               name: 'مدخل إلى البلاغة العربية الكتاب كامل', 
               size: '1.23 MB',
               url: '/files/year1/term1/balagha/pdf/مدخل إلى البلاغة العربية.pdf',
+              isNew: true
+            },
+            { 
+              id: 'balagha-book-002',
+              name: 'تلخيص مقرر ميد البلاغة', 
+              size: '0.12 MB',
+              url: '/files/year1/term1/balagha/pdf/تلخيص بلاغة ميد.pdf',
               isNew: true
             },
           ],
