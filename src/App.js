@@ -425,11 +425,11 @@ const hasNewItemsInSubject = (subject) => {
           ],
           videos: [
             { 
-              id: '',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/balagha/videos/فارغ.mp4',
-              size: '0 MB',
+              id: 'balagha-video-001',
+              name: 'تلخيص مقرر ميد البلاغة', 
+              duration: '07:34',
+              url: '/files/year1/term1/balagha/videos/علم_المعاني__مفتاح_البلاغة.mp4',
+              size: '46.5 MB',
               isNew: true
             }
           ]
