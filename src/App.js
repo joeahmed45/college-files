@@ -306,18 +306,18 @@ const hasNewItemsInSubject = (subject) => {
           ],
           imageGroups: [
             {
-              groupName: 'مُقررات الميد',
+              groupName: 'مُقررات الميد ترم',
               images: [
                 { 
                   id: 'adab-mid-img-001',
-                  name: 'مقرر امتحان أدب ميد مجموعة أولى', 
+                  name: 'مقرر امتحان أدب الميد ترم مجموعة أولى', 
                   size: '240 KB',
                   url: '/files/year1/term1/adab/images/مقرر ميد مجموعة أولى.PNG',
                   isNew: true
                 },
                 { 
                   id: 'adab-mid-img-002',
-                  name: 'مقرر امتحان أدب ميد مجموعة ثانية وثالثة', 
+                  name: 'مقرر امتحان أدب الميد ترم مجموعة ثانية وثالثة', 
                   size: '325 KB',
                   url: '/files/year1/term1/adab/images/مقرر ميد مجموعة ثانية وثالثة.PNG',
                   isNew: true
@@ -403,7 +403,7 @@ const hasNewItemsInSubject = (subject) => {
             },
             { 
               id: 'balagha-book-002',
-              name: 'تلخيص مقرر ميد البلاغة', 
+              name: 'تلخيص مقرر الميد ترم البلاغة', 
               size: '0.12 MB',
               url: '/files/year1/term1/balagha/pdf/تلخيص بلاغة ميد.pdf',
               isNew: true
@@ -426,7 +426,7 @@ const hasNewItemsInSubject = (subject) => {
           videos: [
             { 
               id: 'balagha-video-001',
-              name: 'تلخيص مقرر ميد البلاغة', 
+              name: 'تلخيص مقرر الميد ترم البلاغة', 
               duration: '07:34',
               url: '/files/year1/term1/balagha/videos/علم_المعاني__مفتاح_البلاغة.mp4',
               size: '46.5 MB',
@@ -568,7 +568,7 @@ const hasNewItemsInSubject = (subject) => {
             },
             { 
               id: 'manhag-file-003',
-              name: 'تلخيص الفصل الأول منهج مدرسي ميد', 
+              name: 'تلخيص الفصل الأول منهج مدرسي الميد ترم', 
               size: '0.1 MB',
               url: '/files/year1/term1/manhag/pdf/تلخيص الفصل الأول منهج مدرسي.pdf',
               isNew: true
@@ -857,14 +857,14 @@ id: 'f1-t1-s5',
             },
             { 
               id: '3mly-file-003',
-              name: 'عملي مهنة التعليم وأدوار المعلم فصل أول ميد', 
+              name: 'عملي مهنة التعليم وأدوار المعلم فصل أول الميد ترم', 
               size: '5 MB',
               url: '/files/year1/term1/3mly/pdf/عملى مهنة التعليم ميد.pdf',
               isNew: true
             },
             { 
               id: '3mly-file-004',
-              name: 'تلخيص عملي مهنة التعليم الميد ما عدا الفصل الأول', 
+              name: 'تلخيص عملي مهنة التعليم الميد ترم ما عدا الفصل الأول', 
               size: '0.12 MB',
               url: '/files/year1/term1/3mly/pdf/تلخيص عملي مهنة التعليم ميد.pdf',
               isNew: true
@@ -902,7 +902,7 @@ id: 'f1-t1-s5',
             },
             { 
               id: '3mly-video-002',
-              name: 'تلخيص مهنة التعليم ميد ترم ما عدا الفصل الأول', 
+              name: 'تلخيص مهنة التعليم الميد ترم ما عدا الفصل الأول', 
               duration: '06:08',
               url: '/files/year1/term1/3mly/videos/مهنة_التعليم__رسالة_وتحدي.mp4',
               size: '29 MB',
@@ -949,6 +949,13 @@ id: 'f1-t1-s5',
               url: '/files/year1/term1/3rby/pdf/نموذج تقرير 2.pdf',
               isNew: true
             },
+            { 
+              id: '3rby-file-006',
+              name: 'تلخيص اللغة العربية الميد ترم', 
+              size: '0.1 MB',
+              url: '/files/year1/term1/3rby/pdf/تلخيص اللغة العربية ميد.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -966,11 +973,11 @@ id: 'f1-t1-s5',
           ],
           videos: [
             { 
-              id: '',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/3rby/videos/فارغ.mp4',
-              size: '0 MB',
+              id: '3rby-video-001',
+              name: 'تلخيص الميد ترم', 
+              duration: '06:20',
+              url: '/files/year1/term1/3rby/videos/اللغة_العربية__كنز_وبيان.mp4',
+              size: '41.6 MB',
               isNew: true
             }
           ]
@@ -1276,14 +1283,14 @@ id: 'f1-t1-s5',
             },
             { 
               id: 'nakd-file-002',
-              name: 'نقد الميد', 
+              name: 'نقد الميد ترم', 
               size: '15.8 MB',
               url: '/files/year1/term1/nakd/pdf/نقد الميد.pdf',
               isNew: true
             },
             { 
               id: 'nakd-file-003',
-              name: 'النقد الأدبي المحاضرتان الأولى والثانية', 
+              name: 'النقد الأدبي المحاضرتان الأولى والثانية الميد ترم', 
               size: '0.7 MB',
               url: '/files/year1/term1/nakd/pdf/مدخل إلى النقد الأدبي المحاضرتان الأولى والثانية.pdf',
               isNew: true
@@ -1334,7 +1341,7 @@ id: 'f1-t1-s5',
             },
             { 
               id: 'tafser-file-003',
-              name: 'تجويد الميد', 
+              name: 'تجويد الميد ترم', 
               size: '12.5 MB',
               url: '/files/year1/term1/tafser/pdf/تجويد الميد.pdf',
               isNew: true
@@ -1449,7 +1456,7 @@ id: 'f1-t1-s5',
                 { 
                   id: 'mlfat-img-001',
                   name: 'QR Code for the Website', 
-                  size: '0 KB',
+                  size: '437 KB',
                   url: '/files/year1/term1/mlfat/images/QR Code College Files Website.PNG',
                   isNew: true
                 },
@@ -1464,7 +1471,15 @@ id: 'f1-t1-s5',
               url: '/files/year1/term1/mlfat/videos/ad.mp4',
               size: '8.7 MB',
               isNew: true
-            }
+            },
+            { 
+              id: 'mlfat-video-002',
+              name: 'مميزات الموقع وطريقة استخدامه', 
+              duration: '04:04',
+              url: '/files/year1/term1/mlfat/videos/طريقة استخدام الموقع.mp4',
+              size: '7.8 MB',
+              isNew: true
+            },
           ]
         },
       ],
