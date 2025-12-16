@@ -208,20 +208,27 @@ const hasNewItemsInSubject = (subject) => {
       content: 'تم تطوير الموقع ورفع الملفات والصور والفيديوهات وتم إضافة بعد المميزات لمعرفتها بالتفصيل أضغط على علامة الاستفهام التي في أعلى يمين صفحة الموقع',
       date: '2025-12-13',
       isNew: true
-    }
+    },
+    {
+      id: 'new-2',
+      title: 'إضافة تلخيصات الفاينال',
+      content: 'تم إضافة تلخيص مادة القضايا المجتمعية كاملةً وسيتم إضافة باقي المواد قريبًا إن شاء الله.',
+      date: '2025-12-16',
+      isNew: true
+    },
   ];
   const subjects = {
     first: {
       first: [
                 {
           id: 'f1-t1-s0',
-          name: 'تلخيصات وفيديوهات وأسئلة المنهج كاملًا (قريبًا)',
+          name: 'تلخيصات وفيديوهات وأسئلة المنهج كاملًا',
           files: [
             { 
-              id: '',
-              name: 'فارغ', 
-              size: '0 MB',
-              url: '/files/year1/term1/final/pdf/فارغ.pdf',
+              id: 'final-file-001',
+              name: 'كتاب تلخيص مادة القضايا المجتمعية', 
+              size: '0.73 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة القضايا المجتمعية.pdf',
               isNew: true
             },
           ],
@@ -1478,6 +1485,14 @@ id: 'f1-t1-s5',
               duration: '04:04',
               url: '/files/year1/term1/mlfat/videos/طريقة استخدام الموقع.mp4',
               size: '7.8 MB',
+              isNew: true
+            },
+            { 
+              id: 'mlfat-video-003',
+              name: 'طريقة تنزيل تطبيق College Files App على هواتف أندرويد', 
+              duration: '01:17',
+              url: '/files/year1/term1/mlfat/videos/طريقة تنزيل التطبيق.mp4',
+              size: '7 MB',
               isNew: true
             },
           ]
