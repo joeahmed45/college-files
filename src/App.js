@@ -248,13 +248,21 @@ const hasNewItemsInSubject = (subject) => {
           ],
           videos: [
             { 
-              id: '',
-              name: 'فارغ', 
-              duration: '00:00',
-              url: '/files/year1/term1/final/videos/فارغ.mp4',
-              size: '0 MB',
+              id: 'final-video-001',
+              name: 'تلخيص قضايا مجتمعية ج١', 
+              duration: '07:17',
+              url: '/files/year1/term1/final/videos/علم_اجتماع_السكان__معادلة_توازن.mp4',
+              size: '35 MB',
               isNew: true
-            }
+            },
+            { 
+              id: 'final-video-002',
+              name: 'تلخيص قضايا مجتمعية ج٢', 
+              duration: '07:25',
+              url: '/files/year1/term1/final/videos/التنمية_والسكان__القصة_الكاملة.mp4',
+              size: '32.5 MB',
+              isNew: true
+            },
           ]
         },
         {
@@ -1798,7 +1806,7 @@ id: 'f1-t1-s5',
             </div>
           </div>
           <p className={`text-center mt-4 text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>موقع ملفات كلية التربية شعبة اللغة العربية جامعة أسيوط</p>
-          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد والأسئلة بالذكاء الاصطناعي في مكان واحد كي يسهل على الطالب إيجادها</p>
+          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد والأسئلة بالذكاء الاصطناعي في مكان واحد ليسهل على الطالب إيجادها</p>
           <p className={`text-center mt-4 text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>ولا تنسونا من صالح الدعاء والدعاء لوالدتي بالرحمة 🤲</p>
         </div>
       </header>
