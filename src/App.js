@@ -231,6 +231,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة القضايا المجتمعية.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-002',
+              name: 'كتاب تلخيص مادة اللغة العربية', 
+              size: '0.72 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة اللغة العربية.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -249,7 +256,7 @@ const hasNewItemsInSubject = (subject) => {
           videos: [
             { 
               id: 'final-video-001',
-              name: 'تلخيص قضايا مجتمعية ج١', 
+              name: 'تلخيص قضايا مجتمعية الأول', 
               duration: '07:17',
               url: '/files/year1/term1/final/videos/علم_اجتماع_السكان__معادلة_توازن.mp4',
               size: '35 MB',
@@ -257,10 +264,26 @@ const hasNewItemsInSubject = (subject) => {
             },
             { 
               id: 'final-video-002',
-              name: 'تلخيص قضايا مجتمعية ج٢', 
+              name: 'تلخيص قضايا مجتمعية الثاني', 
               duration: '07:25',
               url: '/files/year1/term1/final/videos/التنمية_والسكان__القصة_الكاملة.mp4',
               size: '32.5 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-003',
+              name: 'تلخيص اللغة العربية الجزء الأول', 
+              duration: '07:48',
+              url: '/files/year1/term1/final/videos/معمار_اللغة_العربية.mp4',
+              size: '41.6 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-004',
+              name: 'تلخيص اللغة العربية الجزء الثاني', 
+              duration: '06:52',
+              url: '/files/year1/term1/final/videos/إتقان_رسالتك__علم_التواصل.mp4',
+              size: '30 MB',
               isNew: true
             },
           ]
