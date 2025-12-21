@@ -238,6 +238,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة اللغة العربية.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-003',
+              name: 'كتاب تلخيص مادة مهنة التعليم وأدوار المعلم ', 
+              size: '0.8 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مهنة التعليم وأدوار المعلم.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -256,7 +263,7 @@ const hasNewItemsInSubject = (subject) => {
           videos: [
             { 
               id: 'final-video-001',
-              name: 'تلخيص قضايا مجتمعية الأول', 
+              name: 'تلخيص قضايا مجتمعية الجزء الأول', 
               duration: '07:17',
               url: '/files/year1/term1/final/videos/علم_اجتماع_السكان__معادلة_توازن.mp4',
               size: '35 MB',
@@ -264,7 +271,7 @@ const hasNewItemsInSubject = (subject) => {
             },
             { 
               id: 'final-video-002',
-              name: 'تلخيص قضايا مجتمعية الثاني', 
+              name: 'تلخيص قضايا مجتمعية الجزء الثاني', 
               duration: '07:25',
               url: '/files/year1/term1/final/videos/التنمية_والسكان__القصة_الكاملة.mp4',
               size: '32.5 MB',
@@ -284,6 +291,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '06:52',
               url: '/files/year1/term1/final/videos/إتقان_رسالتك__علم_التواصل.mp4',
               size: '30 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-005',
+              name: 'تلخيص مهنة التعليم وأدوار المعلم الجزء الأول', 
+              duration: '07:19',
+              url: '/files/year1/term1/final/videos/مهنة_التدريس__من_الحرفة_للاحتراف1.mp4',
+              size: '34.3 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-006',
+              name: 'تلخيص مهنة التعليم وأدوار المعلم الجزء الثاني', 
+              duration: '06:32',
+              url: '/files/year1/term1/final/videos/دور_المعلم__رحلة_م2ستمرة.mp4',
+              size: '32.1 MB',
               isNew: true
             },
           ]
@@ -883,7 +906,7 @@ id: 'f1-t1-s5',
               id: '3mly-file-001',
               name: 'مهنة التعليم وأدوار المعلم تطبيقي فاينال الكتاب كامل', 
               size: '0.5 MB',
-              url: '/files/year1/term1/3mly/pdf/مهنة التعليم وأدوار المعلم تطبيقي.pdf',
+              url: '/files/year1/term1/3mly/pdf/مهنة التعليم وأدوار المعلم تطبيقي .pdf',
               isNew: true
             },
             { 
@@ -1492,10 +1515,17 @@ id: 'f1-t1-s5',
               groupName: 'صور أخرى',
               images: [
                 { 
-                  id: 'mlfat-img-001',
+                  id: 'mlfat-img-01-001',
                   name: 'QR Code for the Website', 
                   size: '437 KB',
                   url: '/files/year1/term1/mlfat/images/QR Code College Files Website.PNG',
+                  isNew: true
+                },
+                { 
+                  id: 'mlfat-img-01-002',
+                  name: 'جدول امتحانات الترم الأول', 
+                  size: '460 KB',
+                  url: '/files/year1/term1/mlfat/images/جدول الامتحانات.PNG',
                   isNew: true
                 },
               ]
