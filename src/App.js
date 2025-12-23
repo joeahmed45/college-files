@@ -245,6 +245,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مهنة التعليم وأدوار المعلم.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-004',
+              name: 'كتاب تلخيص مادة مدخل إلى الأدب العربي ', 
+              size: '1.2 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى الأدب العربي.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -307,6 +314,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '06:32',
               url: '/files/year1/term1/final/videos/دور_المعلم__رحلة_م2ستمرة.mp4',
               size: '32.1 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-007',
+              name: 'تلخيص مدخل إلى الأدب العربي الجزء الأول', 
+              duration: '06:41',
+              url: '/files/year1/term1/final/videos/أدب1.mp4',
+              size: '48.2 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-008',
+              name: 'تلخيص مدخل إلى الأدب العربي الجزء الثاني', 
+              duration: '06:19',
+              url: '/files/year1/term1/final/videos/أدب2.mp4',
+              size: '44.8 MB',
               isNew: true
             },
           ]
