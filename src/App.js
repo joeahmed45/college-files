@@ -252,6 +252,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى الأدب العربي.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-005',
+              name: 'كتاب تلخيص مادة مدخل إلى البلاغة العربية ', 
+              size: '1 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى البلاغة العربية.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -330,6 +337,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '06:19',
               url: '/files/year1/term1/final/videos/أدب2.mp4',
               size: '44.8 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-009',
+              name: 'تلخيص مدخل إلى البلاغة العربية الجزء الأول', 
+              duration: '08:13',
+              url: '/files/year1/term1/final/videos/بلاغة1.mp4',
+              size: '42 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0010',
+              name: 'تلخيص مدخل إلى البلاغة العربية الجزء الثاني', 
+              duration: '07:34',
+              url: '/files/year1/term1/final/videos/بلاغة2.mp4',
+              size: '38 MB',
               isNew: true
             },
           ]
