@@ -216,6 +216,13 @@ const hasNewItemsInSubject = (subject) => {
       date: '2025-12-16',
       isNew: true
     },
+    {
+      id: 'new-3',
+      title: 'تلخيصات نصف المواد',
+      content: 'تم إضافة تخليصات نصف مواد الترم الأول، أنتظروا باقي النصف الأخر.',
+      date: '2025-12-28',
+      isNew: true
+    },
   ];
   const subjects = {
     first: {
