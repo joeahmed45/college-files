@@ -259,6 +259,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى البلاغة العربية.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-006',
+              name: 'كتاب تلخيص مادة الاتجاهات المعاصرة في علم النفس ', 
+              size: '1.4 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص محاضرات مادة الاتجاهات المعاصرة في علم النفس.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -353,6 +360,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '07:34',
               url: '/files/year1/term1/final/videos/بلاغة2.mp4',
               size: '38 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0011',
+              name: 'تلخيص الاتجاهات المعاصرة في علم النفس الجزء الأول', 
+              duration: '06:50',
+              url: '/files/year1/term1/final/videos/اتجاهات1.mp4',
+              size: '30 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0012',
+              name: 'تلخيص الاتجاهات المعاصرة في علم النفس الجزء الثاني', 
+              duration: '07:10',
+              url: '/files/year1/term1/final/videos/اتجاهات2.mp4',
+              size: '35.6 MB',
               isNew: true
             },
           ]
