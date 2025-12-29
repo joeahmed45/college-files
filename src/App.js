@@ -273,6 +273,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص محاضرات مادة الاتجاهات المعاصرة في علم النفس.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-007',
+              name: 'كتاب تلخيص مادة مدخل إلى النحو العربي', 
+              size: '1 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى النحو العربي.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -383,6 +390,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '07:10',
               url: '/files/year1/term1/final/videos/اتجاهات2.mp4',
               size: '35.6 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0013',
+              name: 'تلخيص مدخل إلى النحو العربي الجزء الأول', 
+              duration: '06:24',
+              url: '/files/year1/term1/final/videos/نحو1.mp4',
+              size: '45 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0014',
+              name: 'تلخيص مدخل إلى النحو العربي الجزء الثاني', 
+              duration: '06:36',
+              url: '/files/year1/term1/final/videos/نحو2.mp4',
+              size: '26 MB',
               isNew: true
             },
           ]
