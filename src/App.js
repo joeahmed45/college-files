@@ -2604,7 +2604,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-videos`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '4000px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0' }}>
+                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? 'max-h-none' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.videos.map((video, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-red-50 hover:bg-red-100'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
