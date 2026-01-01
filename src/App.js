@@ -280,6 +280,13 @@ const hasNewItemsInSubject = (subject) => {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى النحو العربي.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-008',
+              name: 'كتاب تلخيص مادة مدخل إلى النحو العربي', 
+              size: '1.5 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مهارات التواصل الصفي.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -406,6 +413,22 @@ const hasNewItemsInSubject = (subject) => {
               duration: '06:36',
               url: '/files/year1/term1/final/videos/نحو2.mp4',
               size: '26 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0015',
+              name: 'تلخيص مهارات التواصل الصفي الجزء الأول', 
+              duration: '07:03',
+              url: '/files/year1/term1/final/videos/مهارات1.mp4',
+              size: '33 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0016',
+              name: 'تلخيص مهارات التواصل الصفي الجزء الثاني', 
+              duration: '06:45',
+              url: '/files/year1/term1/final/videos/مهارات2.mp4',
+              size: '28 MB',
               isNew: true
             },
           ]
