@@ -282,7 +282,7 @@ const hasNewItemsInSubject = (subject) => {
             },
             { 
               id: 'final-file-008',
-              name: 'كتاب تلخيص مادة مدخل إلى النحو العربي', 
+              name: 'كتاب تلخيص مادة مهارات التواصل الصفي', 
               size: '1.5 MB',
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مهارات التواصل الصفي.pdf',
               isNew: true
