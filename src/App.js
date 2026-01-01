@@ -2407,7 +2407,7 @@ id: 'f1-t1-s5',
 </h2>
                 <ChevronDown size={36} className="transition-all duration-500" style={{ transform: expandedYears[year.id] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </div>
-              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedYears[year.id] ? '5000px' : '0', opacity: expandedYears[year.id] ? '1' : '0' }}>
+              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedYears[year.id] ? '30000px' : '0', opacity: expandedYears[year.id] ? '1' : '0' }}>
                 <div className="p-6 space-y-5">
                   {terms.map((term) => (
                     <div key={term.id}>
@@ -2418,7 +2418,7 @@ id: 'f1-t1-s5',
                         <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{term.name}</h3>
                         <ChevronDown size={28} className="transition-all duration-500" style={{ transform: expandedTerms[`${year.id}-${term.id}`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                       </div>
-                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedTerms[`${year.id}-${term.id}`] ? '8000px' : '0', opacity: expandedTerms[`${year.id}-${term.id}`] ? '1' : '0' }}>
+                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedTerms[`${year.id}-${term.id}`] ? '20000px' : '0', opacity: expandedTerms[`${year.id}-${term.id}`] ? '1' : '0' }}>
                         <div className="mt-4 space-y-4 mr-4">
                           {subjects[year.id][term.id].filter(subject => subject.name.toLowerCase().includes(searchQuery.toLowerCase())).map((subject) => (
                             <div key={subject.id} className={`${darkMode ? 'bg-gray-600' : 'bg-white'} rounded-xl shadow-md transition-all duration-500 transform hover:scale-[1.02] hover:shadow-xl`}>
@@ -2439,7 +2439,7 @@ id: 'f1-t1-s5',
                                 </div>
                                 <ChevronDown size={24} className="transition-all duration-500" style={{ transform: expandedSubjects[subject.id] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                               </div>
-                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSubjects[subject.id] ? '6000px' : '0', opacity: expandedSubjects[subject.id] ? '1' : '0' }}>
+                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSubjects[subject.id] ? '8000px' : '0', opacity: expandedSubjects[subject.id] ? '1' : '0' }}>
                                 <div className="p-4 space-y-4">
                                   {subject.files.length > 0 && (
                                     <div>
@@ -2520,7 +2520,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-images`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '2000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0' }}>
+                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '6000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0' }}>
                                         <div className="mt-3 space-y-3">
                                           {subject.imageGroups.map((group, groupIdx) => (
                                             <div key={groupIdx}>
@@ -2538,7 +2538,7 @@ id: 'f1-t1-s5',
 </span>
                                                 <ChevronDown size={18} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                               </div>
-                                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1500px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0' }}>
+                                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '5000px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0' }}>
                                                 <div className="mt-2 mr-4 space-y-2">
                                                   {group.images.map((image, imgIdx) => (
                                                     <div key={imgIdx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-green-50'} rounded-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-md`}>
@@ -2604,7 +2604,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-videos`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className={`transition-all duration-700 ${expandedSections[`${subject.id}-videos`] ? 'max-h-none opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '999999px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.videos.map((video, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-red-50 hover:bg-red-100'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
