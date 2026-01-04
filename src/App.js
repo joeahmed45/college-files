@@ -59,6 +59,7 @@ export default function App() {
       return {};
     }
   });
+  // eslint-disable-next-line no-unused-vars
   const [viewedSections, setViewedSections] = useState(() => {
   try {
     const saved = localStorage.getItem('viewedSections');
@@ -86,7 +87,10 @@ export default function App() {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null);
+  const [showEditConfirm, setShowEditConfirm] = useState(false);
+  const [tempEditedNote, setTempEditedNote] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [noteErrors, setNoteErrors] = useState({ title: '', content: '' });
   
   // حالات الأخبار (News)
   const [viewedNews, setViewedNews] = useState(() => {
@@ -165,13 +169,21 @@ export default function App() {
       console.error('خطأ في حفظ viewedNews:', error);
     }
   }, [viewedNews]);
+  // منع scroll الصفحة الرئيسية عند فتح أي خانة (ملاحظات، أخبار، مساعدة)
   useEffect(() => {
-  try {
-    localStorage.setItem('viewedSections', JSON.stringify(viewedSections));
-  } catch (error) {
-    console.error('خطأ في حفظ viewedSections:', error);
-  }
-}, [viewedSections]);
+    if (isNotePanelOpen || isNewsPanelOpen || showHelp) {
+      // منع scroll للصفحة الرئيسية
+      document.body.style.overflow = 'hidden';
+    } else {
+      // السماح بـ scroll للصفحة الرئيسية
+      document.body.style.overflow = 'unset';
+    }
+    
+    // تنظيف عند إلغاء المكون
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isNotePanelOpen, isNewsPanelOpen, showHelp]);
   
   // تعليم خبر كـ "تم رؤيته"
   const markNewsAsViewed = (newsId) => {
@@ -1724,6 +1736,26 @@ id: 'f1-t1-s5',
       ...prev,
       [`subject-${subjectId}`]: true
     }));
+  } else {
+    // عند إغلاق المادة، أغلق جميع الأقسام الداخلية (الملفات، الصور، الفيديوهات)
+    setExpandedSections(prev => {
+      const updated = { ...prev };
+      // إغلاق قسم الملفات
+      delete updated[`${subjectId}-files`];
+      // إغلاق قسم الصور
+      delete updated[`${subjectId}-images`];
+      // إغلاق قسم الفيديوهات
+      delete updated[`${subjectId}-videos`];
+      
+      // إغلاق جميع مجموعات الصور التابعة لهذه المادة
+      Object.keys(updated).forEach(key => {
+        if (key.startsWith(`${subjectId}-imageGroup-`)) {
+          delete updated[key];
+        }
+      });
+      
+      return updated;
+    });
   }
 };
   const toggleSection = (subjectId, section) => {
@@ -1806,24 +1838,42 @@ id: 'f1-t1-s5',
   };
   
   const saveNote = () => {
-    if (currentNote.title.trim() && currentNote.content.trim()) {
-      const newNote = {
-        id: Date.now().toString(),
-        title: currentNote.title,
-        content: currentNote.content,
-        createdAt: new Date().toLocaleString('ar-EG', { 
-  year: 'numeric', 
-  month: '2-digit', 
-  day: '2-digit',
-  hour: '2-digit',
-  minute: '2-digit'
-})
-      };
-      setNotes(prev => [newNote, ...prev]);
-      setIsCreatingNote(false);
-      setCurrentNote({ title: '', content: '' });
-    }
+  let hasError = false;
+  const errors = { title: '', content: '' };
+  
+  if (!currentNote.title.trim()) {
+    errors.title = '⚠️ يرجى كتابة عنوان الملاحظة';
+    hasError = true;
+  }
+  
+  if (!currentNote.content.trim()) {
+    errors.content = '⚠️ يرجى كتابة محتوى الملاحظة';
+    hasError = true;
+  }
+  
+  setNoteErrors(errors);
+  
+  if (hasError) {
+    return;
+  }
+  
+  const newNote = {
+    id: Date.now().toString(),
+    title: currentNote.title,
+    content: currentNote.content,
+    createdAt: new Date().toLocaleString('ar-EG', { 
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
   };
+  setNotes(prev => [newNote, ...prev]);
+  setIsCreatingNote(false);
+  setCurrentNote({ title: '', content: '' });
+  setNoteErrors({ title: '', content: '' });
+};
   
   const viewNote = (note) => {
     setIsViewingNote(true);
@@ -1838,18 +1888,63 @@ id: 'f1-t1-s5',
   };
   
   const saveEditedNote = () => {
-    if (currentNote.title.trim() && currentNote.content.trim()) {
-      setNotes(prev => 
-        prev.map(note => 
-          note.id === currentNote.id 
-            ? { ...currentNote, editedAt: new Date().toLocaleString('ar-EG') }
-            : note
-        )
-      );
-      setIsEditingNote(false);
-      setIsViewingNote(true);
-    }
-  };
+  let hasError = false;
+  const errors = { title: '', content: '' };
+  
+  if (!currentNote.title.trim()) {
+    errors.title = '⚠️ يرجى كتابة عنوان الملاحظة';
+    hasError = true;
+  }
+  
+  if (!currentNote.content.trim()) {
+    errors.content = '⚠️ يرجى كتابة محتوى الملاحظة';
+    hasError = true;
+  }
+  
+  setNoteErrors(errors);
+  
+  if (hasError) {
+    return;
+  }
+  
+  // حفظ البيانات المعدلة مؤقتاً وإظهار نافذة التأكيد
+  setTempEditedNote(currentNote);
+  setShowEditConfirm(true);
+};
+
+const confirmEditNote = () => {
+  if (tempEditedNote) {
+    // تحديث الملاحظة ونقلها لأول القائمة
+    setNotes(prev => {
+      const updatedNote = {
+        ...tempEditedNote,
+        editedAt: new Date().toLocaleString('ar-EG', { 
+          year: 'numeric', 
+          month: '2-digit', 
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      };
+      
+      // إزالة الملاحظة القديمة من مكانها ووضعها في الأول
+      const filteredNotes = prev.filter(note => note.id !== tempEditedNote.id);
+      return [updatedNote, ...filteredNotes];
+    });
+    
+    setShowEditConfirm(false);
+    setTempEditedNote(null);
+    setIsEditingNote(false);
+    setIsViewingNote(true);
+    setNoteErrors({ title: '', content: '' });
+  }
+};
+
+const cancelEditNote = () => {
+  setShowEditConfirm(false);
+  setTempEditedNote(null);
+  // البقاء في وضع التعديل - لا يتم حفظ أي شيء
+};
   
   const requestDeleteNote = (note) => {
     setNoteToDelete(note);
@@ -1876,6 +1971,10 @@ id: 'f1-t1-s5',
   
   const handleNoteInputChange = (field, value) => {
     setCurrentNote(prev => ({ ...prev, [field]: value }));
+    // إزالة رسالة الخطأ عند الكتابة
+    if (noteErrors[field]) {
+      setNoteErrors(prev => ({ ...prev, [field]: '' }));
+    }
   };
   
   // دوال الأخبار
@@ -1980,9 +2079,9 @@ id: 'f1-t1-s5',
               </button>
             </div>
           </div>
-          <p className={`text-center mt-4 text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>موقع ملفات كلية التربية شعبة اللغة العربية جامعة أسيوط</p>
-          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد والأسئلة بالذكاء الاصطناعي في مكان واحد ليسهل على الطالب إيجادها</p>
-          <p className={`text-center mt-4 text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>ولا تنسونا من صالح الدعاء والدعاء لوالدتي بالرحمة 🤲</p>
+          <p className={`text-center mt-4 text-lg font-bold ${darkMode ? 'text-white' : 'text-white'}`}>موقع ملفات كلية التربية شعبة اللغة العربية جامعة أسيوط</p>
+          <p className={`text-center mt-4 text-medium font-bold ${darkMode ? 'text-white' : 'text-white'}`}>هذا الموقع مُبرمَج لتجميع ملفات المواد التي تخص الكلية وفيديوهات تلخيص المواد والأسئلة بالذكاء الاصطناعي في مكان واحد ليسهل على الطالب إيجادها</p>
+          <p className={`text-center mt-4 text-sm font-bold ${darkMode ? 'text-white' : 'text-white'}`}>ولا تنسونا من صالح الدعاء والدعاء لوالدتي بالرحمة 🤲</p>
         </div>
       </header>
       
@@ -2041,9 +2140,9 @@ id: 'f1-t1-s5',
             </div>
             
             {/* محتوى الملاحظات */}
-            <div className="p-4 max-h-96 overflow-y-auto" style={{ width: '320px' }}>
+            <div className="p-4" style={{ width: '320px', height: '384px', display: 'flex', flexDirection: 'column' }}>
               {isCreatingNote ? (
-                <div className="space-y-3">
+                <div className="space-y-3 flex flex-col h-full">
                   <div>
                     <label className={`block text-sm font-medium mb-1 ${
                       darkMode ? 'text-gray-300' : 'text-gray-700'
@@ -2055,14 +2154,23 @@ id: 'f1-t1-s5',
                       value={currentNote.title}
                       onChange={(e) => handleNoteInputChange('title', e.target.value)}
                       className={`w-full px-3 py-2 rounded-lg border ${
+                        noteErrors.title 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : darkMode 
+                          ? 'border-gray-600 focus:ring-blue-500' 
+                          : 'border-gray-300 focus:ring-blue-500'
+                      } ${
                         darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          ? 'bg-gray-700 text-white' 
+                          : 'bg-white text-gray-900'
+                      } focus:outline-none focus:ring-2`}
                       placeholder="أدخل عنوان الملاحظة"
                     />
+                    {noteErrors.title && (
+                      <p className="text-red-500 text-sm mt-1">{noteErrors.title}</p>
+                    )}
                   </div>
-                  <div>
+                  <div className="flex-1 flex flex-col">
                     <label className={`block text-sm font-medium mb-1 ${
                       darkMode ? 'text-gray-300' : 'text-gray-700'
                     }`}>
@@ -2071,14 +2179,22 @@ id: 'f1-t1-s5',
                     <textarea
                       value={currentNote.content}
                       onChange={(e) => handleNoteInputChange('content', e.target.value)}
-                      rows="6"
-                      className={`w-full px-3 py-2 rounded-lg border ${
+                      className={`flex-1 px-3 py-2 rounded-lg border resize-none ${
+                        noteErrors.content 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : darkMode 
+                          ? 'border-gray-600 focus:ring-blue-500' 
+                          : 'border-gray-300 focus:ring-blue-500'
+                      } ${
                         darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          ? 'bg-gray-700 text-white' 
+                          : 'bg-white text-gray-900'
+                      } focus:outline-none focus:ring-2`}
                       placeholder="اكتب ملاحظاتك هنا..."
                     />
+                    {noteErrors.content && (
+                      <p className="text-red-500 text-sm mt-1">{noteErrors.content}</p>
+                    )}
                   </div>
                   <button
                     onClick={saveNote}
@@ -2090,8 +2206,8 @@ id: 'f1-t1-s5',
                   </button>
                 </div>
               ) : isEditingNote ? (
-                <div className="space-y-3">
-                  <div>
+                <div className="flex flex-col h-full">
+                  <div className="mb-3">
                     <label className={`block text-sm font-medium mb-1 ${
                       darkMode ? 'text-gray-300' : 'text-gray-700'
                     }`}>
@@ -2102,14 +2218,23 @@ id: 'f1-t1-s5',
                       value={currentNote.title}
                       onChange={(e) => handleNoteInputChange('title', e.target.value)}
                       className={`w-full px-3 py-2 rounded-lg border ${
+                        noteErrors.title 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : darkMode 
+                          ? 'border-gray-600 focus:ring-blue-500' 
+                          : 'border-gray-300 focus:ring-blue-500'
+                      } ${
                         darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          ? 'bg-gray-700 text-white' 
+                          : 'bg-white text-gray-900'
+                      } focus:outline-none focus:ring-2`}
                       placeholder="أدخل عنوان الملاحظة"
                     />
+                    {noteErrors.title && (
+                      <p className="text-red-500 text-sm mt-1">{noteErrors.title}</p>
+                    )}
                   </div>
-                  <div>
+                  <div className="flex-1 flex flex-col mb-3" style={{ minHeight: '230px' }}>
                     <label className={`block text-sm font-medium mb-1 ${
                       darkMode ? 'text-gray-300' : 'text-gray-700'
                     }`}>
@@ -2118,14 +2243,22 @@ id: 'f1-t1-s5',
                     <textarea
                       value={currentNote.content}
                       onChange={(e) => handleNoteInputChange('content', e.target.value)}
-                      rows="6"
-                      className={`w-full px-3 py-2 rounded-lg border ${
+                      className={`flex-1 px-3 py-2 rounded-lg border resize-none ${
+                        noteErrors.content 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : darkMode 
+                          ? 'border-gray-600 focus:ring-blue-500' 
+                          : 'border-gray-300 focus:ring-blue-500'
+                      } ${
                         darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          ? 'bg-gray-700 text-white' 
+                          : 'bg-white text-gray-900'
+                      } focus:outline-none focus:ring-2`}
                       placeholder="اكتب ملاحظاتك هنا..."
                     />
+                    {noteErrors.content && (
+                      <p className="text-red-500 text-sm mt-1">{noteErrors.content}</p>
+                    )}
                   </div>
                   <button
                     onClick={saveEditedNote}
@@ -2138,17 +2271,19 @@ id: 'f1-t1-s5',
                   </button>
                 </div>
               ) : isViewingNote ? (
-                <div className="space-y-3">
+                <div className="space-y-3 flex flex-col h-full">
                   <h3 className={`text-lg font-bold ${
                     darkMode ? 'text-white' : 'text-gray-900'
                   }`}>
                     {currentNote.title}
                   </h3>
-                  <p className={`whitespace-pre-wrap ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    {currentNote.content}
-                  </p>
+                  <div className="flex-1 overflow-y-auto">
+                    <p className={`whitespace-pre-wrap ${
+                      darkMode ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
+                      {currentNote.content}
+                    </p>
+                  </div>
                   <p className={`text-xs ${
                     darkMode ? 'text-gray-500' : 'text-gray-400'
                   }`}>
@@ -2168,15 +2303,16 @@ id: 'f1-t1-s5',
                   </div>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {notes.length === 0 ? (
-                    <p className={`text-center py-4 ${
-                      darkMode ? 'text-gray-400' : 'text-gray-500'
-                    }`}>
-                      لا توجد ملاحظات بعد
-                    </p>
-                  ) : (
-                    notes.map(note => (
+  <div className="flex flex-col h-full">
+    <div className="flex-1 overflow-y-auto space-y-3 mb-3">
+      {notes.length === 0 ? (
+        <p className={`text-center py-4 ${
+          darkMode ? 'text-gray-400' : 'text-gray-500'
+        }`}>
+          لا توجد ملاحظات بعد
+        </p>
+      ) : (
+        notes.map(note => (
                       <div 
                         key={note.id}
                         className={`p-3 rounded-lg cursor-pointer transition-colors duration-200 ${
@@ -2212,13 +2348,21 @@ id: 'f1-t1-s5',
                           darkMode ? 'text-gray-500' : 'text-gray-400'
                         }`}>
                           {note.createdAt}
+                          {note.editedAt && (
+                            <span className={`mr-1 ${
+                              darkMode ? 'text-amber-400' : 'text-amber-600'
+                            }`}>
+                              (عُدلت في: {note.editedAt})
+                            </span>
+                          )}
                         </p>
                       </div>
                     ))
-                  )}
-                  
-                  {/* زر إضافة ملاحظة جديدة */}
-                  <button
+    )}
+    </div>
+    
+    {/* زر إضافة ملاحظة جديدة - ثابت في الأسفل */}
+    <button
                     onClick={openCreateNote}
                     className={`w-full py-2 rounded-lg font-medium flex items-center justify-center gap-2 ${
                       darkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green-600 hover:bg-green-700'
@@ -2390,7 +2534,40 @@ id: 'f1-t1-s5',
           </div>
         </div>
       )}
-      
+      {/* نافذة تأكيد التعديل */}
+{showEditConfirm && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl p-6 max-w-sm w-full`}>
+      <h3 className={`text-xl font-bold mb-4 ${
+        darkMode ? 'text-white' : 'text-gray-900'
+      }`}>
+        تأكيد حفظ التعديل
+      </h3>
+      <p className={`mb-6 ${
+        darkMode ? 'text-gray-300' : 'text-gray-700'
+      }`}>
+        هل أنت متأكد من أنك تريد حفظ التعديلات على هذه الملاحظة؟
+      </p>
+      <div className="flex gap-3">
+        <button
+          onClick={confirmEditNote}
+          className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium transition-colors duration-200"
+        >
+          حفظ التعديل
+        </button>
+        <button
+          onClick={cancelEditNote}
+          className={`flex-1 py-2 rounded-lg font-medium transition-colors duration-200 ${
+            darkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+          }`}
+        >
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       <div className="container mx-auto px-4 py-8">
         <div className="space-y-6">
           {years.map((year) => (
@@ -2439,7 +2616,7 @@ id: 'f1-t1-s5',
                                 </div>
                                 <ChevronDown size={24} className="transition-all duration-500" style={{ transform: expandedSubjects[subject.id] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                               </div>
-                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSubjects[subject.id] ? '8000px' : '0', opacity: expandedSubjects[subject.id] ? '1' : '0' }}>
+                              <div className="transition-all duration-700" style={{ maxHeight: expandedSubjects[subject.id] ? '400px' : '0', opacity: expandedSubjects[subject.id] ? '1' : '0', overflowY: expandedSubjects[subject.id] ? 'auto' : 'hidden', overflowX: 'clip' }}>
                                 <div className="p-4 space-y-4">
                                   {subject.files.length > 0 && (
                                     <div>
@@ -2456,7 +2633,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-files`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-files`] ? '6000px' : '0', opacity: expandedSections[`${subject.id}-files`] ? '1' : '0' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-files`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-files`] ? '1' : '0', overflow: expandedSections[`${subject.id}-files`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.files.map((file, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-blue-50'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
@@ -2520,7 +2697,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-images`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '6000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0', overflow: expandedSections[`${subject.id}-images`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-3">
                                           {subject.imageGroups.map((group, groupIdx) => (
                                             <div key={groupIdx}>
@@ -2538,8 +2715,8 @@ id: 'f1-t1-s5',
 </span>
                                                 <ChevronDown size={18} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                               </div>
-                                              <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '5000px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0' }}>
-                                                <div className="mt-2 mr-4 space-y-2">
+                                              <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0', overflow: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'visible' : 'hidden', overflowX: 'clip' }}>
+  <div className="mt-2 mr-4 space-y-2">
                                                   {group.images.map((image, imgIdx) => (
                                                     <div key={imgIdx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-green-50'} rounded-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-md`}>
                                                       <div className="flex items-center gap-2 flex-1">
@@ -2604,7 +2781,7 @@ id: 'f1-t1-s5',
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-videos`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="overflow-visible transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '999999px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0', overflow: expandedSections[`${subject.id}-videos`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.videos.map((video, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-red-50 hover:bg-red-100'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
