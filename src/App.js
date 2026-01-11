@@ -1397,7 +1397,7 @@ const deleteQuizHistory = () => {
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-files`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-files`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-files`] ? '1' : '0', overflow: expandedSections[`${subject.id}-files`] ? 'visible' : 'hidden' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-files`] ? '3000px' : '0', opacity: expandedSections[`${subject.id}-files`] ? '1' : '0', overflow: expandedSections[`${subject.id}-files`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.files.map((file, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-blue-50'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
@@ -1461,7 +1461,7 @@ const deleteQuizHistory = () => {
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-images`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0', overflow: expandedSections[`${subject.id}-images`] ? 'visible' : 'hidden' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-images`] ? '3000px' : '0', opacity: expandedSections[`${subject.id}-images`] ? '1' : '0', overflow: expandedSections[`${subject.id}-images`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-3">
                                           {subject.imageGroups.map((group, groupIdx) => (
                                             <div key={groupIdx}>
@@ -1479,10 +1479,10 @@ const deleteQuizHistory = () => {
 </span>
                                                 <ChevronDown size={18} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                               </div>
-                                              <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0', overflow: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'visible' : 'hidden', overflowX: 'clip' }}>
+                                              <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '2000px' : '0', opacity: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? '1' : '0', overflow: expandedSections[`${subject.id}-imageGroup-${groupIdx}`] ? 'visible' : 'hidden', overflowX: 'clip' }}>
   <div className="mt-2 mr-4 space-y-2">
                                                   {group.images.map((image, imgIdx) => (
-                                                    <div key={imgIdx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-green-50'} rounded-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-md`}>
+                                                    <div key={imgIdx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-50 hover:bg-green-50'} rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md`}>
                                                       <div className="flex items-center gap-2 flex-1">
                                                         <Image size={18} className={darkMode ? 'text-teal-400' : 'text-green-600'} />
                                                         <div>
@@ -1547,7 +1547,7 @@ const deleteQuizHistory = () => {
       </h5>
       <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-quizzes`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
     </div>
-    <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-quizzes`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-quizzes`] ? '1' : '0', overflow: expandedSections[`${subject.id}-quizzes`] ? 'visible' : 'hidden' }}>
+    <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-quizzes`] ? '3000px' : '0', opacity: expandedSections[`${subject.id}-quizzes`] ? '1' : '0', overflow: expandedSections[`${subject.id}-quizzes`] ? 'visible' : 'hidden' }}>
       <div className="mt-3 space-y-2">
         {subject.quizzes.map((quiz, idx) => (
           <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-yellow-50 hover:bg-yellow-100'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
@@ -1602,7 +1602,7 @@ const deleteQuizHistory = () => {
 </h5>
                                         <ChevronDown size={20} className="transition-all duration-500" style={{ transform: expandedSections[`${subject.id}-videos`] ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                                       </div>
-                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '1000px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0', overflow: expandedSections[`${subject.id}-videos`] ? 'visible' : 'hidden' }}>
+                                      <div className="transition-all duration-700" style={{ maxHeight: expandedSections[`${subject.id}-videos`] ? '3000px' : '0', opacity: expandedSections[`${subject.id}-videos`] ? '1' : '0', overflow: expandedSections[`${subject.id}-videos`] ? 'visible' : 'hidden' }}>
                                         <div className="mt-3 space-y-2">
                                           {subject.videos.map((video, idx) => (
                                             <div key={idx} className={`flex items-center justify-between p-3 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-red-50 hover:bg-red-100'} rounded-lg transition-all duration-500 transform hover:scale-[1.02] hover:shadow-md`}>
@@ -1745,14 +1745,14 @@ const deleteQuizHistory = () => {
   <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4" style={{ fontFamily: 'Segoe UI, Tahoma, Arial, sans-serif' }}>
     <div className={`${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-white via-gray-50 to-white'} rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
       {/* شريط العنوان المحدث */}
-<div className={`${darkMode ? 'bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900' : 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600'} p-6 shadow-lg`}>
-  <div className="flex justify-between items-start gap-4">
+<div className={`${darkMode ? 'bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900' : 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600'} p-3 sm:p-4 shadow-lg`}>
+  <div className="flex justify-between items-start gap-2">
     <div className="flex-1">
-      <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
+      <h3 className="text-base sm:text-xl font-bold text-white mb-1 drop-shadow-lg">
         {activeQuiz.name}
       </h3>
-      <div className="flex items-center gap-4 text-white/90">
-        <span className="flex items-center gap-1 text-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3 text-white/90">
+        <span className="flex items-center gap-1 text-xs sm:text-sm">
           <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
           السؤال {currentQuestionIndex + 1} من {activeQuiz.questions.length}
         </span>
@@ -1761,7 +1761,7 @@ const deleteQuizHistory = () => {
         </span>
       </div>
       {/* شريط التقدم */}
-      <div className="mt-3 bg-white/20 rounded-full h-2 overflow-hidden">
+      <div className="mt-2 bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
         <div 
           className="bg-white h-full rounded-full transition-all duration-500 shadow-lg"
           style={{ width: `${(Object.keys(userAnswers).length / activeQuiz.questions.length) * 100}%` }}
@@ -1849,30 +1849,30 @@ const deleteQuizHistory = () => {
 )}
 </div>
       
-      <div className="p-8 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 200px)' }}>
+      <div className="p-3 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 140px)' }}>
         {activeQuiz.questions[currentQuestionIndex] && (
           <div className="space-y-6">
             {/* السؤال */}
-            <div className={`p-6 rounded-2xl shadow-lg ${darkMode ? 'bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-indigo-700' : 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200'}`}>
-              <div className="flex items-start gap-3">
-                <span className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${darkMode ? 'bg-indigo-600 text-white' : 'bg-blue-600 text-white'} shadow-lg`}>
+            <div className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg ${darkMode ? 'bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-indigo-700' : 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200'}`}>
+              <div className="flex items-start gap-2">
+                <span className={`flex-shrink-0 w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-sm sm:text-base ${darkMode ? 'bg-indigo-600 text-white' : 'bg-blue-600 text-white'} shadow-lg`}>
                   {currentQuestionIndex + 1}
                 </span>
-                <p className={`text-xl font-bold leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-sm sm:text-lg font-bold leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                   {activeQuiz.questions[currentQuestionIndex].question}
                 </p>
               </div>
             </div>
             
             {/* الخيارات */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               {activeQuiz.questions[currentQuestionIndex].options.map((option, idx) => {
                 const questionId = activeQuiz.questions[currentQuestionIndex].id;
                 const isSelected = userAnswers[questionId] === idx;
                 const isCorrect = idx === activeQuiz.questions[currentQuestionIndex].correctAnswer;
                 const hasAnswered = userAnswers[questionId] !== undefined;
                 
-                let buttonClass = `w-full p-5 rounded-xl text-right transition-all duration-300 transform hover:scale-[1.02] border-2 ${
+                let buttonClass = `w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-right transition-all duration-300 transform hover:scale-[1.02] border-2 ${
                   darkMode 
                     ? 'bg-gray-800/50 hover:bg-gray-700/50 border-gray-600 text-gray-200' 
                     : 'bg-white hover:bg-gray-50 border-gray-200 text-gray-900'
@@ -1880,13 +1880,13 @@ const deleteQuizHistory = () => {
                 
                 if (hasAnswered) {
                   if (isSelected && isCorrect) {
-                    buttonClass = 'w-full p-5 rounded-xl text-right bg-gradient-to-r from-green-500 to-emerald-500 text-white border-2 border-green-600 shadow-xl transform scale-[1.02]';
+                    buttonClass = 'w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-right bg-gradient-to-r from-green-500 to-emerald-500 text-white border-2 border-green-600 shadow-xl transform scale-[1.02]';
                   } else if (isSelected && !isCorrect) {
-                    buttonClass = 'w-full p-5 rounded-xl text-right bg-gradient-to-r from-red-500 to-pink-500 text-white border-2 border-red-600 shadow-xl';
+                    buttonClass = 'w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-right bg-gradient-to-r from-red-500 to-pink-500 text-white border-2 border-red-600 shadow-xl';
                   } else if (!isSelected && isCorrect) {
-                    buttonClass = 'w-full p-5 rounded-xl text-right bg-gradient-to-r from-green-400 to-emerald-400 text-white border-2 border-green-500 shadow-lg';
+                    buttonClass = 'w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-right bg-gradient-to-r from-green-400 to-emerald-400 text-white border-2 border-green-500 shadow-lg';
                   } else {
-                    buttonClass = `w-full p-5 rounded-xl text-right border-2 opacity-60 ${
+                    buttonClass = `w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-right border-2 opacity-60 ${
                       darkMode 
                         ? 'bg-gray-800/30 border-gray-700 text-gray-400' 
                         : 'bg-gray-100 border-gray-300 text-gray-500'
@@ -1901,8 +1901,8 @@ const deleteQuizHistory = () => {
                     className={buttonClass}
                     disabled={hasAnswered || quizSubmitted}
                   >
-                    <div className="flex items-center gap-4">
-                      <span className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className={`flex-shrink-0 w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-sm sm:text-base ${
                         hasAnswered
                           ? isSelected
                             ? 'bg-white/30 text-white'
@@ -1915,7 +1915,7 @@ const deleteQuizHistory = () => {
                       } shadow-md`}>
                         {['أ', 'ب', 'ج', 'د'][idx]}
                       </span>
-                      <span className={`flex-1 text-lg font-medium ${
+                      <span className={`flex-1 text-sm sm:text-base font-medium ${
                         hasAnswered && !isSelected && !isCorrect
                           ? 'line-through'
                           : ''
@@ -1937,19 +1937,19 @@ const deleteQuizHistory = () => {
             
             {/* رسالة التغذية الراجعة الفورية */}
             {!quizSubmitted && showResults[activeQuiz.questions[currentQuestionIndex].id] !== undefined && (
-              <div className={`p-5 rounded-xl shadow-lg border-2 ${
+              <div className={`p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border-2 ${
                 showResults[activeQuiz.questions[currentQuestionIndex].id] 
                   ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-400' 
                   : 'bg-gradient-to-r from-red-50 to-pink-50 border-red-400'
               }`}>
-                <div className="flex items-center gap-3">
-                  <span className={`text-3xl ${
+                <div className="flex items-center gap-2">
+                  <span className={`text-2xl sm:text-3xl ${
                     showResults[activeQuiz.questions[currentQuestionIndex].id] 
                       ? '🎉' 
                       : '😔'
                   }`}></span>
                   <div>
-                    <p className={`font-bold text-lg ${
+                    <p className={`font-bold text-sm sm:text-base ${
                       showResults[activeQuiz.questions[currentQuestionIndex].id]
                         ? 'text-green-700'
                         : 'text-red-700'
@@ -1959,7 +1959,7 @@ const deleteQuizHistory = () => {
                         : 'إجابة خاطئة'}
                     </p>
                     {!showResults[activeQuiz.questions[currentQuestionIndex].id] && (
-                      <p className="text-sm text-gray-700 mt-1 font-medium">
+                      <p className="text-xs sm:text-sm text-gray-700 mt-1 font-medium">
                         الإجابة الصحيحة: {activeQuiz.questions[currentQuestionIndex].options[activeQuiz.questions[currentQuestionIndex].correctAnswer]}
                       </p>
                     )}
@@ -2241,7 +2241,7 @@ const deleteQuizHistory = () => {
     <p className={`text-xs mb-2 translate-y-1 ${
       darkMode ? 'text-gray-400' : 'text-gray-600'
     }`}>المتوسط</p>
-    <p className={`text-xl font-bold mt-auto translate-x-1 ${
+    <p className={`text-xl font-bold mt-auto ${
       darkMode ? 'text-blue-400' : 'text-blue-600'
     }`}>
       {(quizHistory[activeQuiz.id].reduce((sum, a) => sum + parseFloat(a.percentage), 0) / quizHistory[activeQuiz.id].length).toFixed(1)}%
