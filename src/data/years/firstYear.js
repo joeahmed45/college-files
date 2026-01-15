@@ -9832,8 +9832,8 @@ export const firstYear = {
             { 
               id: 'final-file-013',
               name: 'كتاب تلخيص مادة مدخل إلى النقد العربي', 
-              size: '0 MB',
-              url: '/files/year1/term1/final/pdf/.pdf',
+              size: '1.2 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى النقد العربي.pdf',
               isNew: true
             },
           ],
