@@ -8031,6 +8031,7 @@ export const firstYear = {
   id: 'quiz-010',
   name: 'امتحان مدخل إلى النقد العربي اختياري',
   description: 'امتحان شامل في مادة مدخل إلى النقد العربي اختياري',
+  password: 'sasa',
   questions: [
 {
     "id": "anakd1",
@@ -9836,6 +9837,13 @@ export const firstYear = {
               url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة مدخل إلى النقد العربي.pdf',
               isNew: true
             },
+            { 
+              id: 'final-file-014',
+              name: 'كتاب تلخيص مادة المكتبة العربية', 
+              size: '1 MB',
+              url: '/files/year1/term1/final/pdf/كتاب تلخيص مادة المكتبة العربية.pdf',
+              isNew: true
+            },
           ],
           imageGroups: [            
             {
@@ -10042,6 +10050,22 @@ export const firstYear = {
               duration: '08:39',
               url: '/files/year1/term1/final/videos/نقد2.mp4',
               size: '52 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0025',
+              name: 'تلخيص المكتبة العربية الجزء الأول', 
+              duration: '07:39',
+              url: '/files/year1/term1/final/videos/مكتبة1.mp4',
+              size: '20 MB',
+              isNew: true
+            },
+            { 
+              id: 'final-video-0026',
+              name: 'تلخيص المكتبة العربية الجزء الثاني', 
+              duration: '07:49',
+              url: '/files/year1/term1/final/videos/مكتبة2.mp4',
+              size: '20 MB',
               isNew: true
             },
           ]
