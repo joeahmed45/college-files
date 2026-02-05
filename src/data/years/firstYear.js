@@ -8031,7 +8031,6 @@ export const firstYear = {
   id: 'quiz-010',
   name: 'امتحان مدخل إلى النقد العربي اختياري',
   description: 'امتحان شامل في مادة مدخل إلى النقد العربي اختياري',
-  password: 'sasa',
   questions: [
 {
     "id": "anakd1",
@@ -11318,5 +11317,958 @@ id: 'f1-t1-s5',
           ]
         },
       ],
-      second: []
-    };
+      
+  second: [
+    {
+      id: 'f1-t2-s1',
+      name: 'مدخل إلى علم اللغة أ.د. عبد الحفيظ السيد',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: '',
+          name: 'فارغ',
+          size: '0 MB',
+          url: '/files/year1/term2/lo8a/pdf/فارغ.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/lo8a/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/lo8a/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s2',
+      name: 'القيادة التربوية د. مروة مصطفى',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'qyada-file-001',
+          name: 'القيادة التربوية الكتاب كامل',
+          size: '1.3 MB',
+          url: '/files/year1/term2/qyada/pdf/مذكرة_القيادة_التربوية_كاملة_المستوى_الأول_بكالوريوس_فصل_دراسي_ثاني[1] (1).pdf',
+          isNew: true
+        },
+        {
+          id: 'qyada-file-002',
+          name: 'ملخص القيادة التربوية',
+          size: '5.3 MB',
+          url: '/files/year1/term2/qyada/pdf/ملخص القيادة التربوية.pdf',
+          isNew: true
+        },
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/qyada/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/qyada/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s3',
+      name: 'علوم الأرض والفضاء',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: '',
+          name: 'فارغ',
+          size: '0 MB',
+          url: '/files/year1/term2/fada2/pdf/فارغ.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/fada2/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/fada2/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s4',
+      name: 'تدريب ميداني ١ د. صابر علام',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+      files: [
+        {
+          id: 'tdreb-file-001',
+          name: 'تدريب ميداني ١ الكتاب كامل',
+          size: '32.5 MB',
+          url: '/files/year1/term2/tdreb/pdf/أولى عام عربي تدريب ميداني1 فصل ثان د.صابر علام (1).pdf',
+          isNew: true
+        },
+        {
+          id: 'tdreb-file-002',
+          name: 'ملخص التدريب الميدانى',
+          size: '2.5 MB',
+          url: '/files/year1/term2/tdreb/pdf/ملخص التدريب الميدانى.pdf',
+          isNew: true
+        },
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/tdreb/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/tdreb/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s5',
+      name: 'التربية من أجل التنمية المستدامة د. غادة فوزي',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'tarbya-file-001',
+          name: 'التربية من أجل التنمية المستدامة الكتاب كامل',
+          size: '0.9 MB',
+          url: '/files/year1/term2/tarbya/pdf/مذكرة التربية من أجل التنمية المستدامة 2025.pdf',
+          isNew: true
+        },
+        {
+          id: 'tarbya-file-002',
+          name: 'ملخص التربية من أجل التنمية المستدامة ١',
+          size: '3 MB',
+          url: '/files/year1/term2/tarbya/pdf/ملخص التنمية المستدامة .pdf',
+          isNew: true
+        },
+        {
+          id: 'tarbya-file-003',
+          name: 'ملخص التربية من أجل التنمية المستدامة ٢',
+          size: '5 MB',
+          url: '/files/year1/term2/tarbya/pdf/تربية.pdf',
+          isNew: true
+        },
+        {
+          id: 'tarbya-file-004',
+          name: 'امتحان فاينال التربية من أجل التنمية المستدامة ٢٠٢٤',
+          size: '1.8 MB',
+          url: '/files/year1/term2/tarbya/pdf/فاينال التربية من أجل التنمية المستدامة .pdf',
+          isNew: true
+        },
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/tarbya/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/tarbya/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s6',
+      name: 'أدب جاهلي د. حنان أبو القاسم',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'gahly-file-001',
+          name: 'أدب جاهلي الكتاب كامل',
+          size: '5 MB',
+          url: '/files/year1/term2/gahly/pdf/أدب جاهلي أولى عربي عام.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/gahly/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/gahly/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s7',
+      name: 'علم نفس النمو د. رباب الصغير',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'nmw-file-001',
+          name: 'علم نفس النمو الكتاب كامل',
+          size: '1.9 MB',
+          url: '/files/year1/term2/nmw/pdf/الفرقة الاولي علم نفس نمو  اساسي.pdf',
+          isNew: true
+        },
+        {
+          id: 'nmw-file-002',
+          name: 'امتحان أعمال السنة علم نفس النمو ١',
+          size: '0.35 MB',
+          url: '/files/year1/term2/nmw/pdf/اختبار_1_أعمال_السنة_علم_النفس_النمو.pdf',
+          isNew: true
+        },
+        {
+          id: 'nmw-file-003',
+          name: 'امتحان أعمال السنة علم نفس النمو ٢',
+          size: '0.14 MB',
+          url: '/files/year1/term2/nmw/pdf/اختبار2 أعمال السنة لمقرر النمو-١.pdf',
+          isNew: true
+        },
+        {
+          id: 'nmw-file-004',
+          name: 'امتحان فاينال علم نفس النمو ٢٠٢٤',
+          size: '1.6 MB',
+          url: '/files/year1/term2/nmw/pdf/فاينال علم نفس النمو .pdf',
+          isNew: true
+        },
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/nmw/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/nmw/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s8',
+      name: 'عملي مهارات القراءة',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'qera2a3mly-file-001',
+          name: 'عملي مهارات القراءة الكتاب كامل',
+          size: '0.7 MB',
+          url: '/files/year1/term2/qera2a3mly/pdf/مهارات قراءة اولى عربي ف2عملي.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/qera2a3mly/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/qera2a3mly/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s9',
+      name: 'عروض ١ د. محمد الطيب',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: '',
+          name: 'فارغ',
+          size: '0 MB',
+          url: '/files/year1/term2/3arod/pdf/فارغ.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/3arod/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/3arod/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s10',
+      name: 'أصوات لُغوية أ.د. عبد الحفيظ السيد',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: '',
+          name: 'فارغ',
+          size: '0 MB',
+          url: '/files/year1/term2/aswat/pdf/فارغ.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/aswat/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/aswat/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s11',
+      name: 'مهارات القراءة د. أماني حامد',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'qera2a-file-001',
+          name: 'مهارات القراءة الكتاب كامل',
+          size: '1.7 MB',
+          url: '/files/year1/term2/qera2a/pdf/مهارات قراءة اولى عربي ف 2نظري.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/qera2a/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/qera2a/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s12',
+      name: 'اللغة الإنجليزية د. عبير علي',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'english-file-001',
+          name: 'اللغة الإنجليزية الكتاب كامل',
+          size: '1.2 MB',
+          url: '/files/year1/term2/english/pdf/محتوى مقرر لغه انجليزيه أولى عربي.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/english/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/english/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s13',
+      name: 'نحو وصرف ١',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'sarf-file-001',
+          name: 'النحو والصرف ١ الكتاب كامل',
+          size: '3 MB',
+          url: '/files/year1/term2/sarf/pdf/نحو وصرف 1.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/sarf/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/sarf/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s14',
+      name: 'الأدب الإسلامي والأُموي د. عاطف عبد العليم',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: 'islamy-file-001',
+          name: 'أدب إسلامي وأموي الكتاب كامل',
+          size: '8.5 MB',
+          url: '/files/year1/term2/islamy/pdf/الأدب الإسلامي والأموي الفرقة الأولى عام.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'فارغ',
+          images: [
+            {
+              id: '',
+              name: 'فارغ',
+              size: '0 KB',
+              url: '/files/year1/term2/islamy/images/فارغ.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/islamy/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+    {
+      id: 'f1-t2-s15',
+      name: 'ملفات أخرى',
+      quizzes: [
+        {
+          id: '',
+          name: 'فارغ',
+          description: 'فارغ',
+          questions: [
+            {
+              id: '',
+              question: 'فارغ',
+              options: ['فارغ', 'فارغ', 'فارغ', 'فارغ'],
+              correctAnswer: 0 
+            },
+
+          ],
+          isNew: true
+        },
+
+      ],
+
+      files: [
+        {
+          id: '',
+          name: 'فارغ',
+          size: '0 MB',
+          url: '/files/year1/term2/o5ra/pdf/فارغ.pdf',
+          isNew: true
+        },
+
+      ],
+      imageGroups: [
+        {
+          groupName: 'صور أخرى',
+          images: [
+            {
+              id: 'o5ra-image-001',
+              name: 'جدول محاضرات الترم الثاني',
+              size: '125 KB',
+              url: '/files/year1/term2/o5ra/images/جدول الترم الثاني.PNG',
+              isNew: true
+            }
+          ]
+        },
+
+      ],
+
+      videos: [
+        {
+          id: '',
+          name: 'فارغ',
+          duration: '00:00',
+          url: '/files/year1/term2/o5ra/videos/فارغ.mp4',
+          size: '0 MB',
+          isNew: true
+        },
+
+      ],
+    },
+  ]
+};
